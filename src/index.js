@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Test from "./component/Test";
+import RootRouter from './router/RootRouter'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Test />
+    <RootRouter/>
   </React.StrictMode>,
   document.getElementById("root")
 );
