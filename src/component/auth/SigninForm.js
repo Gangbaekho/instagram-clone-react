@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,10 @@ const SigninForm = () => {
   };
 
   return (
-    <form onSubmit={submitButtonHandler}>
+    <form
+      className="w-3/4 mx-auto mt-10 space-y-8"
+      onSubmit={submitButtonHandler}
+    >
       <div>
         <label htmlFor="email">email</label>
         <input

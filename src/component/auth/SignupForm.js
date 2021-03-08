@@ -13,7 +13,10 @@ const SignupForm = () => {
   };
 
   return (
-    <form onSubmit={submitButtonHandler}>
+    <form
+      className="w-3/4 mx-auto mt-10 space-y-8"
+      onSubmit={submitButtonHandler}
+    >
       <div>
         <label htmlFor="email">Email</label>
         <input

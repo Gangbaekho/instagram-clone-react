@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import SigninForm from "../component/auth/SighinForm";
+import SigninForm from "../component/auth/SigninForm";
 
 const SigninPage = () => {
   return (

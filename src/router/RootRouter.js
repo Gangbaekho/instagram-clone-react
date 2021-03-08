@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // PAGES
 import ActivityPage from "../page/ActivityPage";
-import AuthPage from "../page/AuthPage";
 import DirectMessagePage from "../page/DirectMessagePage";
 import ExplorePage from "../page/ExplorePage";
 import FeedPage from "../page/FeedPage";
@@ -18,7 +17,6 @@ const RootRouter = () => {
       <div>
         <Switch>
           <Route path="/" component={FeedPage} exact />
-          <Route path="/auth" component={AuthPage} exact />
           <Route path="/direct-message" component={DirectMessagePage} exact />
           <Route path="/explore" component={ExplorePage} exact />
           <Route path="/individual" component={IndividualPage} exact />
