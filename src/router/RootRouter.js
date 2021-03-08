@@ -8,6 +8,9 @@ import DirectMessagePage from "../page/DirectMessagePage";
 import ExplorePage from "../page/ExplorePage";
 import FeedPage from "../page/FeedPage";
 import IndividualPage from "../page/IndividualPage";
+import SigninPage from "../page/SigninPage";
+import SignupPage from "../page/SignupPage";
+import NotExistPage from "../page/NotExistPage";
 
 const RootRouter = () => {
   return (
@@ -20,6 +23,9 @@ const RootRouter = () => {
           <Route path="/explore" component={ExplorePage} exact />
           <Route path="/individual" component={IndividualPage} exact />
           <Route path="/activity" component={ActivityPage} exact />
+          <Route path="/signin" component={SigninPage} exact />
+          <Route path="/signup" component={SignupPage} exact />
+          <Route component={NotExistPage} />
         </Switch>
       </div>
     </BrowserRouter>
