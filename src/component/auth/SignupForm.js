@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { postFetchApi } from "../../utils/fetchApis";
+import SERVER_ADDRESS from "../../constant/serverAddress";
 
-const SignupForm = () => {
+const SignupForm = (props) => {
+  const { history } = props;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -12,27 +14,28 @@ const SignupForm = () => {
     console.log(password);
     console.log(passwordCheck);
 
-    postFetchApi("/auth/signup", "POST", { email, password, passwordCheck });
-    // fetch(`${SERVER_ADDRESS}/auth/signup`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //     passwordCheck,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    // postFetchApi("/auth/signup", "POST", { email, password, passwordCheck });
+    fetch(`${SERVER_ADDRESS}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        passwordCheck,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        history.push("/signin");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

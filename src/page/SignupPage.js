@@ -8,7 +8,7 @@ const SignupPage = (props) => {
       <h1 className="font-bold text-4xl underline text-indigo-500 text-center">
         This is signup page!
       </h1>
-      <SignupForm />
+      <SignupForm history={props.history} />
     </div>
   );
 };

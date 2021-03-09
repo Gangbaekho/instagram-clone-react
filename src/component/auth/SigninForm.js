@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SERVER_ADDRESS from "../../constant/serverAddress";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,25 @@ const SigninForm = () => {
     e.preventDefault();
     console.log(email);
     console.log(password);
+
+    fetch(`${SERVER_ADDRESS}/auth/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
