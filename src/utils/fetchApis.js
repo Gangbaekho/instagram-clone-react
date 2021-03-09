@@ -1,23 +1,18 @@
 import SERVER_ADDRESS from "../constant/serverAddress";
 
-const postFetchApi = (endpoint, method, body, headers = {}) => {
-  fetch(SERVER_ADDRESS + endpoint, {
+const fetchPostAPI = (
+  endpoint,
+  {
+    method = "POST",
+    headers = { "Content-Type": "application/json" },
+    body,
+  } = {}
+) => {
+  return fetch(SERVER_ADDRESS + endpoint, {
     method: method,
-    headers: {
-      "Content-Type": "application/json",
-      ...headers,
-    },
+    headers: headers,
     body: JSON.stringify(body),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  });
 };
 
-export { postFetchApi };
+export { fetchPostAPI };

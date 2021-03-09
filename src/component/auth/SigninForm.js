@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SERVER_ADDRESS from "../../constant/serverAddress";
+import { fetchPostAPI } from "../../utils/fetchApis";
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
@@ -10,13 +11,7 @@ const SigninForm = () => {
     console.log(email);
     console.log(password);
 
-    fetch(`${SERVER_ADDRESS}/auth/signin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
+    fetchPostAPI("/auth/signin", { body: { email, password } })
       .then((res) => {
         return res.json();
       })
