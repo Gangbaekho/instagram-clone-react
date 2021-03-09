@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SERVER_ADDRESS from "../../constant/serverAddress";
 import { fetchPostAPI } from "../../utils/fetchApis";
 
 const SigninForm = () => {
@@ -8,8 +7,6 @@ const SigninForm = () => {
 
   const submitButtonHandler = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
 
     fetchPostAPI("/auth/signin", { body: { email, password } })
       .then((res) => {
