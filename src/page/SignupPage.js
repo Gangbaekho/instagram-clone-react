@@ -2,7 +2,7 @@ import React from "react";
 
 import SignupForm from "../component/auth/SignupForm";
 
-const SignupPage = () => {
+const SignupPage = (props) => {
   return (
     <div>
       <h1 className="font-bold text-4xl underline text-indigo-500 text-center">

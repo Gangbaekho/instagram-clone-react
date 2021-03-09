@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SERVER_ADDRESS from "../../constant/serverAddress";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,27 @@ const SignupForm = () => {
     console.log(email);
     console.log(password);
     console.log(passwordCheck);
+
+    fetch(`${SERVER_ADDRESS}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        passwordCheck,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
