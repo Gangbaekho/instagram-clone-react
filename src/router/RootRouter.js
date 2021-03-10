@@ -9,6 +9,7 @@ import FeedPage from "../page/FeedPage";
 import IndividualPage from "../page/IndividualPage";
 import SigninPage from "../page/SigninPage";
 import SignupPage from "../page/SignupPage";
+import AddPage from "../page/AddPage";
 import NotExistPage from "../page/NotExistPage";
 
 const RootRouter = () => {
@@ -23,6 +24,7 @@ const RootRouter = () => {
           <Route path="/activity" component={ActivityPage} exact />
           <Route path="/signin" component={SigninPage} exact />
           <Route path="/signup" component={SignupPage} exact />
+          <Route path="/add" component={AddPage} exact />
           <Route component={NotExistPage} />
         </Switch>
       </div>

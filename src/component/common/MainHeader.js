@@ -11,6 +11,8 @@ import clickedHeart from "../../image/clicked_heart.s.png";
 import clickedMessage from "../../image/clicked_message.s.png";
 import clickedUser from "../../image/clicked_user.s.png";
 import clickedCompass from "../../image/clicked_compass.s.png";
+import add from "../../image/default_add.s.png";
+import clickedAdd from "../../image/clicked_add.s.png";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -59,6 +61,13 @@ const MainHeader = (props) => {
               className="h-12 cursor-pointer"
               src={selectedIcon === "activity" ? clickedHeart : heart}
               onClick={iconClickHandler.bind(this, "activity")}
+            />
+          </li>
+          <li>
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "add" ? clickedAdd : add}
+              onClick={iconClickHandler.bind(this, "add")}
             />
           </li>
           <li>
