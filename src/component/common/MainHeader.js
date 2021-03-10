@@ -30,49 +30,49 @@ const MainHeader = (props) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full">
-      <div className="max-w-custom border-solid border-4 border-light-blue-500 text-center mx-auto flex justify-between items-center">
-        <div>JINSTAGRAM</div>
-        <div className="hidden md:block">SEARCHBOX</div>
+    <div className="fixed top-0 left-0 w-full border-solid border-2 border-gray-500 bg-white">
+      <div className="max-w-custom text-center mx-auto flex justify-between items-center py-2">
+        <div className="font-custom text-2xl">JINSTAGRAM</div>
+        <div className="hidden sm:block">SEARCHBOX</div>
         <ul className="flex">
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "" ? clickedHome : home}
               onClick={iconClickHandler.bind(this, "")}
             />
           </li>
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "direct-message" ? clickedMessage : message}
               onClick={iconClickHandler.bind(this, "direct-message")}
             />
           </li>
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "explore" ? clickedCompass : compass}
               onClick={iconClickHandler.bind(this, "explore")}
             />
           </li>
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "activity" ? clickedHeart : heart}
               onClick={iconClickHandler.bind(this, "activity")}
             />
           </li>
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "add" ? clickedAdd : add}
               onClick={iconClickHandler.bind(this, "add")}
             />
           </li>
           <li>
             <img
-              className="h-12 cursor-pointer"
+              className="h-10 cursor-pointer"
               src={selectedIcon === "individual" ? clickedUser : user}
               onClick={iconClickHandler.bind(this, "individual")}
             />
