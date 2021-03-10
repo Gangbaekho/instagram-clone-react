@@ -1,7 +1,12 @@
 import React from "react";
+import MainHeader from "../component/common/MainHeader";
 
-const ExplorePage = () => {
-  return <div>This is explore page</div>;
+const ExplorePage = (props) => {
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 };
 
 export default ExplorePage;

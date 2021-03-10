@@ -9,9 +9,6 @@ const FeedPage = (props) => {
 
   return (
     <div>
-      <h1 className="text-center text-4xl font-bold text-indigo-500 underline">
-        This is feed page
-      </h1>
       <MainHeader />
     </div>
   );

@@ -1,26 +1,32 @@
 import React from "react";
 
 // ICONS
-import home from "../../image/default_home.png";
-import heart from "../../image/default_heart.png";
-import message from "../../image/default_message.png";
-import user from "../../image/default_user.png";
-import compass from "../../image/default_compass.png";
-import clickedHome from "../../image/clicked_home.png";
-import clickedHeart from "../../image/clicked_heart.png";
-import clickedMessage from "../../image/clicked_message.png";
-import clickedUser from "../../image/clicked_user.png";
-import clickedCompass from "../../image/clicked_compass.png";
+import home from "../../image/default_home.s.png";
+import heart from "../../image/default_heart.s.png";
+import message from "../../image/default_message.s.png";
+import user from "../../image/default_user.s.png";
+import compass from "../../image/default_compass.s.png";
+import clickedHome from "../../image/clicked_home.s.png";
+import clickedHeart from "../../image/clicked_heart.s.png";
+import clickedMessage from "../../image/clicked_message.s.png";
+import clickedUser from "../../image/clicked_user.s.png";
+import clickedCompass from "../../image/clicked_compass.s.png";
 
-// 일단 해결해야 할 문제가 무엇이냐?
-// MainHeader는 해당 아이콘을 누르면
-// 다른 url로 redirect 해야 한다는 것이다.
-// 음. 어쩃든 이 것의 내용을 공유해야 한다는 것인데
-// 일단 가장 간단한 방법으로는 MainHeader를 각각의 Page에 넣은 다음에
-// redux를 통해서 관련한 것을 바꿔주는 그런 것이지. 일단은 이걸로 해볼까나.
-// 그리고 나중에 고치지 뭐.
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { setIcon } from "../../store/actions/navigation";
 
 const MainHeader = (props) => {
+  const { selectedIcon } = useSelector((state) => state.navigations);
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const iconClickHandler = (icon) => {
+    dispatch(setIcon(icon));
+    history.push(`/${icon}`);
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full">
       <div className="max-w-custom border-solid border-4 border-light-blue-500 text-center mx-auto flex justify-between items-center">
@@ -28,19 +34,39 @@ const MainHeader = (props) => {
         <div className="hidden md:block">SEARCHBOX</div>
         <ul className="flex">
           <li>
-            <img className="h-12 cursor-pointer" src={clickedHome} />
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "" ? clickedHome : home}
+              onClick={iconClickHandler.bind(this, "")}
+            />
           </li>
           <li>
-            <img className="h-12 cursor-pointer" src={message} />
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "direct-message" ? clickedMessage : message}
+              onClick={iconClickHandler.bind(this, "direct-message")}
+            />
           </li>
           <li>
-            <img className="h-12 cursor-pointer" src={compass} />
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "explore" ? clickedCompass : compass}
+              onClick={iconClickHandler.bind(this, "explore")}
+            />
           </li>
           <li>
-            <img className="h-12 cursor-pointer" src={heart} />
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "activity" ? clickedHeart : heart}
+              onClick={iconClickHandler.bind(this, "activity")}
+            />
           </li>
           <li>
-            <img className="h-12 cursor-pointer" src={user} />
+            <img
+              className="h-12 cursor-pointer"
+              src={selectedIcon === "individual" ? clickedUser : user}
+              onClick={iconClickHandler.bind(this, "individual")}
+            />
           </li>
         </ul>
       </div>

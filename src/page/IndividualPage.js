@@ -1,7 +1,12 @@
 import React from "react";
+import MainHeader from "../component/common/MainHeader";
 
-const IndividualPage = () => {
-  return <div>This is individual page</div>;
+const IndividualPage = (props) => {
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 };
 
 export default IndividualPage;

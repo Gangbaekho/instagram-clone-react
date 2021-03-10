@@ -1,7 +1,12 @@
 import React from "react";
+import MainHeader from "../component/common/MainHeader";
 
-const DirectMessagePage = () => {
-  return <div>This is direct message page</div>;
+const DirectMessagePage = (props) => {
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 };
 
 export default DirectMessagePage;

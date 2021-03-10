@@ -1,7 +1,7 @@
 import { SET_ICON } from "../actions/navigation";
 
 const initialState = {
-  selectedIcon: "home",
+  selectedIcon: "",
 };
 
 export default (state = initialState, action) => {

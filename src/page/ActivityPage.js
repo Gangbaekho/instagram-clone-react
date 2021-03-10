@@ -1,7 +1,12 @@
 import React from "react";
+import MainHeader from "../component/common/MainHeader";
 
-const ActivityPage = () => {
-  return <div>This is activity page</div>;
+const ActivityPage = (props) => {
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 };
 
 export default ActivityPage;

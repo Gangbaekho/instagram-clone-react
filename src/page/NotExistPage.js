@@ -1,7 +1,12 @@
 import React from "react";
+import MainHeader from "../component/common/MainHeader";
 
-const NotExistPage = () => {
-  return <div>This is 404 page.</div>;
+const NotExistPage = (props) => {
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 };
 
 export default NotExistPage;
