@@ -16,8 +16,16 @@ import clickedAdd from "../../image/clicked_add.s.png";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 import { setIcon } from "../../store/actions/navigation";
+
+import {
+  FEED,
+  DIRECT_MESSAGE,
+  EXPLORE,
+  ACTIVITY,
+  ADD,
+  INDIVISUAL,
+} from "../../constant/page";
 
 const MainHeader = (props) => {
   const { selectedIcon } = useSelector((state) => state.navigations);
@@ -38,43 +46,43 @@ const MainHeader = (props) => {
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "" ? clickedHome : home}
-              onClick={iconClickHandler.bind(this, "")}
+              src={selectedIcon === FEED ? clickedHome : home}
+              onClick={iconClickHandler.bind(this, FEED)}
             />
           </li>
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "direct-message" ? clickedMessage : message}
-              onClick={iconClickHandler.bind(this, "direct-message")}
+              src={selectedIcon === DIRECT_MESSAGE ? clickedMessage : message}
+              onClick={iconClickHandler.bind(this, DIRECT_MESSAGE)}
             />
           </li>
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "explore" ? clickedCompass : compass}
-              onClick={iconClickHandler.bind(this, "explore")}
+              src={selectedIcon === EXPLORE ? clickedCompass : compass}
+              onClick={iconClickHandler.bind(this, EXPLORE)}
             />
           </li>
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "activity" ? clickedHeart : heart}
-              onClick={iconClickHandler.bind(this, "activity")}
+              src={selectedIcon === ACTIVITY ? clickedHeart : heart}
+              onClick={iconClickHandler.bind(this, ACTIVITY)}
             />
           </li>
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "add" ? clickedAdd : add}
-              onClick={iconClickHandler.bind(this, "add")}
+              src={selectedIcon === ADD ? clickedAdd : add}
+              onClick={iconClickHandler.bind(this, ADD)}
             />
           </li>
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === "individual" ? clickedUser : user}
-              onClick={iconClickHandler.bind(this, "individual")}
+              src={selectedIcon === INDIVISUAL ? clickedUser : user}
+              onClick={iconClickHandler.bind(this, INDIVISUAL)}
             />
           </li>
         </ul>
