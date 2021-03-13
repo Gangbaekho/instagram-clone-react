@@ -1,11 +1,10 @@
 import React from "react";
-import FriendRecommendation from "../component/feed/FriendRecommendation";
-import FriendRecommendationContainer from "../component/feed/FriendRecommendationContainer";
+import MainFooter from "../component/common/MainFooter";
 
 const TestPage = (props) => {
   return (
     <div>
-      <FriendRecommendationContainer />
+      <MainFooter />
     </div>
   );
 };
