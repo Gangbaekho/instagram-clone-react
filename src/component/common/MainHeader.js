@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useLayoutEffect } from "react";
 
 // ICONS
 import home from "../../image/default_home.s.png";
@@ -28,6 +28,8 @@ import {
 } from "../../constant/page";
 
 const MainHeader = (props) => {
+  const myRef = useRef();
+
   const { selectedIcon } = useSelector((state) => state.navigations);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -37,9 +39,16 @@ const MainHeader = (props) => {
     history.push(`/${icon}`);
   };
 
+  useLayoutEffect(() => {
+    console.dir(myRef.current.getBoundingClientRect());
+  });
+
   return (
-    <div className="fixed top-0 left-0 w-full border-solid border-2 border-gray-500 bg-white">
-      <div className="max-w-custom text-center mx-auto flex justify-between items-center py-2">
+    <div
+      className="fixed top-0 left-0 w-full border-solid border-2 border-gray-500 bg-white"
+      ref={myRef}
+    >
+      <div className=" text-center mx-auto flex justify-between items-center py-2">
         <div className="font-custom text-2xl">JINSTAGRAM</div>
         <div className="hidden sm:block">SEARCHBOX</div>
         <ul className="flex">
