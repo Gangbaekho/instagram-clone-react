@@ -2,7 +2,7 @@ import React from "react";
 
 const MainFooter = (props) => {
   return (
-    <div className="border-2 border-black border-solid w-96 space-y-3">
+    <div className="w-96 space-y-3">
       <div className="text-gray-400 text-sm text-opacity-70 cursor-pointer">
         소개.도움말.홍보 센터. API. 채용 정보.
       </div>
