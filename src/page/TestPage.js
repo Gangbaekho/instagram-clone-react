@@ -1,24 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
 import CustomCarousel from "../component/common/CustomCarousel";
 
+// 한 번에 보여줄 갯수
+// 한 칸에 차지하는 너비
+// 전체 Item의 갯수가 필요함.
+
 const TestPage = (props) => {
   const [translateXValue, setTranslateXValue] = useState(0);
   const [myCss, setMyCss] = useState("");
 
+  const myRef = useRef();
+
+  console.dir(myRef.current.children.length);
+
   useEffect(() => {
-    setMyCss(`translate(${translateXValue * 160}px,0px)`);
+    setMyCss(`translate(${translateXValue * 320}px,0px)`);
     console.log(myCss);
   }, [translateXValue]);
-
-  const myRef = useRef();
 
   return (
     <div className="flex">
       <div>
         <button
           onClick={() => {
-            setTranslateXValue((prev) => prev - 1);
-            console.log(translateXValue);
+            if (translateXValue < 0) {
+              setTranslateXValue((prev) => prev + 1);
+            }
           }}
         >
           Back
@@ -26,9 +33,9 @@ const TestPage = (props) => {
       </div>
       <div className="max-w-md overflow-hidden border-2 border-yellow-900 border-solid">
         <div
-          ref={myRef}
-          className="flex border-2 border-black border-solid transform"
+          className="flex transform transition delay-150 duration-200 ease-in-out "
           style={{ transform: myCss }}
+          ref={myRef}
         >
           <div className="w-40 border-2 border-blue-500 border-solid flex-none">
             Item 1
@@ -77,7 +84,9 @@ const TestPage = (props) => {
       <div>
         <button
           onClick={() => {
-            console.log("forward");
+            if (translateXValue > -5) {
+              setTranslateXValue((prev) => prev - 1);
+            }
           }}
         >
           Forward
