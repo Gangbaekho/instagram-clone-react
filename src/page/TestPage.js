@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import CustomCarousel from "../component/common/CustomCarousel";
+import CustomCarousel from "../component/common/StoryCarousel";
 
 // 한 번에 보여줄 갯수
 // 한 칸에 차지하는 너비

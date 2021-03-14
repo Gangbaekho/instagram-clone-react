@@ -12,6 +12,7 @@ import SignupPage from "../page/SignupPage";
 import AddPage from "../page/AddPage";
 import NotExistPage from "../page/NotExistPage";
 import TestPage from "../page/TestPage";
+import TestPageTwo from "../page/TestPageTwo";
 
 const RootRouter = () => {
   return (
@@ -27,6 +28,7 @@ const RootRouter = () => {
           <Route path="/signup" component={SignupPage} exact />
           <Route path="/add" component={AddPage} exact />
           <Route path="/test" component={TestPage} exact />
+          <Route path="/test2" component={TestPageTwo} exact />
           <Route component={NotExistPage} />
         </Switch>
       </div>
