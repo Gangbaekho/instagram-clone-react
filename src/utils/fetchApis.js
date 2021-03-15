@@ -33,7 +33,7 @@ const fetchPostAPIWithJWT = (
   });
 };
 
-const fetchPostFomDataWithJWT = (
+const fetchPostFormDataWithJWT = (
   endpoint,
   {
     method = "POST",
@@ -51,4 +51,4 @@ const fetchPostFomDataWithJWT = (
   });
 };
 
-export { fetchPostAPI, fetchPostAPIWithJWT, fetchPostFomDataWithJWT };
+export { fetchPostAPI, fetchPostAPIWithJWT, fetchPostFormDataWithJWT };
