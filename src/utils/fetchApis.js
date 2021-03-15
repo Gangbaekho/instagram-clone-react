@@ -33,4 +33,22 @@ const fetchPostAPIWithJWT = (
   });
 };
 
-export { fetchPostAPI, fetchPostAPIWithJWT };
+const fetchPostFomDataWithJWT = (
+  endpoint,
+  {
+    method = "POST",
+    headers = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body,
+  } = {}
+) => {
+  return fetch(SERVER_ADDRESS + endpoint, {
+    method: method,
+    headers: headers,
+    body: body,
+  });
+};
+
+export { fetchPostAPI, fetchPostAPIWithJWT, fetchPostFomDataWithJWT };
