@@ -26,7 +26,7 @@ const TestPage = (props) => {
       <form onSubmit={formSubmitHandler}>
         <div>
           <label htmlFor="test">TEST:</label>
-          <input type="text" placeholder="test" id="test" name="test" />
+          <input type="text" placeholder="test" id=" test" name="test" />
         </div>
         <div>
           <label htmlFor="image">IMAGE:</label>
