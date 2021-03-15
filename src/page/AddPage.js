@@ -34,11 +34,20 @@ const AddPage = (props) => {
         <form onSubmit={submitFormHandler}>
           <div>
             <label htmlFor="content">Content:</label>
-            <textarea id="content" placeholder="text here"></textarea>
+            <textarea
+              id="content"
+              name="content"
+              placeholder="text here"
+            ></textarea>
           </div>
           <div>
             <label htmlFor="contentUrls">contentUrls:</label>
-            <input type="text" id="contentUrls" placeholder="text me" />
+            <input
+              type="text"
+              name="conteotUrls"
+              id="contentUrls"
+              placeholder="text me"
+            />
           </div>
           <button>Submit</button>
         </form>
