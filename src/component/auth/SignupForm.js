@@ -7,11 +7,14 @@ const SignupForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
+  const [nickName, setNickName] = useState("");
 
   const submitButtonHandler = (e) => {
     e.preventDefault();
 
-    fetchPostAPI("/auth/signup", { body: { email, password, passwordCheck } })
+    fetchPostAPI("/auth/signup", {
+      body: { email, nickName, password, passwordCheck },
+    })
       .then((res) => {
         return res.json();
       })
@@ -38,6 +41,18 @@ const SignupForm = (props) => {
           placeholder="Email"
           onInput={(e) => {
             setEmail(e.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <label htmlFor="nickname">Nick Name</label>
+        <input
+          id="nickname"
+          type="text"
+          name="nickname"
+          placeholder="Nick Name"
+          onInput={(e) => {
+            setNickName(e.target.value);
           }}
         />
       </div>

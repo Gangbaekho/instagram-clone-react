@@ -1,15 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { fetchPostFormDataWithJWT } from "../utils/fetchApis";
-
 const TestPage = (props) => {
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("test", e.target.elements.test.value);
-    formData.append("image", e.target.elements.image.files[0]);
-    fetchPostFormDataWithJWT("/feed/test", { body: formData })
+  const buttonGetHandler = () => {
+    fetch("http://localhost:8080/feed/")
       .then((res) => {
         return res.json();
       })
@@ -22,18 +15,8 @@ const TestPage = (props) => {
   };
 
   return (
-    <div className="border-2 border-black border-solid">
-      <form onSubmit={formSubmitHandler}>
-        <div>
-          <label htmlFor="test">TEST:</label>
-          <input type="text" placeholder="test" id=" test" name="test" />
-        </div>
-        <div>
-          <label htmlFor="image">IMAGE:</label>
-          <input type="file" id="image" name="image" />
-        </div>
-        <button>Submit</button>
-      </form>
+    <div>
+      <button onClick={buttonGetHandler}>GET FEEDS</button>
     </div>
   );
 };
