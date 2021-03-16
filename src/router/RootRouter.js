@@ -13,6 +13,7 @@ import AddPage from "../page/AddPage";
 import NotExistPage from "../page/NotExistPage";
 import TestPage from "../page/TestPage";
 import TestPageTwo from "../page/TestPageTwo";
+import TestPageThree from "../page/TestPageThree";
 
 const RootRouter = () => {
   return (
@@ -29,6 +30,7 @@ const RootRouter = () => {
           <Route path="/add" component={AddPage} exact />
           <Route path="/test" component={TestPage} exact />
           <Route path="/test2" component={TestPageTwo} exact />
+          <Route path="/test3" component={TestPageThree} exact />
           <Route component={NotExistPage} />
         </Switch>
       </div>

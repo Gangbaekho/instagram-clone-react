@@ -29,6 +29,7 @@ const Feed = (props) => {
           <div>SHARE ICON</div>
         </div>
         <div className="px-5">LIKE COUNT: {props.likeCount}</div>
+        <div className="px-5">{props.content}</div>
         <div className="px-5">REPLY AREA</div>
       </article>
       <article className="grid grid-cols-10 px-5">
