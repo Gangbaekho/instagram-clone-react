@@ -1,6 +1,7 @@
 import React from "react";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
+import Reply from "./Reply";
 
 // import defaultUser from "../../image/default_user.s.png";
 
@@ -24,13 +25,20 @@ const Feed = (props) => {
         />
       </article>
       <article>
-        <div className="flex justify-between items-center px-5">
+        <div className="flex justify-between items-center px-5 border-2 border-solid border-black">
           <div>ICONS</div>
           <div>SHARE ICON</div>
         </div>
-        <div className="px-5">LIKE COUNT: {props.likeCount}</div>
-        <div className="px-5">{props.content}</div>
-        <div className="px-5">REPLY AREA</div>
+        <div className="px-5 border-2 border-solid border-black">
+          LIKE COUNT: {props.likeCount}
+        </div>
+        <div className="flex px-5 border-2 border-solid border-black">
+          <div className="pr-2">{props.userNickName}</div>
+          <div className="pl-2">{props.content}</div>
+        </div>
+        {props.replyIds.map((reply) => {
+          return <Reply {...reply} />;
+        })}
       </article>
       <article className="grid grid-cols-10 px-5">
         <div className="place-self-start">imogi</div>
