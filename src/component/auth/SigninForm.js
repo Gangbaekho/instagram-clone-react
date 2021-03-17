@@ -20,6 +20,8 @@ const SigninForm = () => {
         console.log(data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
+        localStorage.setItem("userNickName", data.userNickName);
+        localStorage.setItem("userProfileImageUrl", data.userProfileImageUrl);
         history.push("/");
       })
       .catch((error) => {
