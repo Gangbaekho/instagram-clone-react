@@ -4,7 +4,13 @@ import SERVER_ADDRESS from "../../constant/serverAddress";
 import Reply from "./Reply";
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
-// import defaultUser from "../../image/default_user.s.png";
+import default_heart from "../../image/default_heart.s.png";
+import clicked_heart from "../../image/clicked_heart.s.png";
+import default_detail from "../../image/default_detail.s.png";
+import clicked_detail from "../../image/clicked_detail.s.png";
+import default_share from "../../image/default_share.s.png";
+import clicked_share from "../../image/clicked_share.s.png";
+import default_setting from "../../image/default_setting.s.png";
 
 const Feed = (props) => {
   const [replyContent, setReplyContent] = useState("");
@@ -41,7 +47,9 @@ const Feed = (props) => {
           />
           <span className="align-middle">{props.userNickName}</span>
         </div>
-        <div>dotdotdot</div>
+        <button>
+          <img src={default_setting} className="w-10" />
+        </button>
       </article>
       <article>
         <img
@@ -51,8 +59,19 @@ const Feed = (props) => {
       </article>
       <article>
         <div className="flex justify-between items-center px-5 border-2 border-solid border-black">
-          <div>ICONS</div>
-          <div>SHARE ICON</div>
+          <div>
+            <button>
+              <img src={default_heart} className="w-10" />
+            </button>
+            <button>
+              <img src={default_detail} className="w-10" />
+            </button>
+          </div>
+          <div>
+            <button>
+              <img src={default_share} className="w-10" />
+            </button>
+          </div>
         </div>
         <div className="px-5 border-2 border-solid border-black">
           LIKE COUNT: {props.likeCount}
@@ -61,9 +80,11 @@ const Feed = (props) => {
           <div className="pr-2">{props.userNickName}</div>
           <div className="pl-2">{props.content}</div>
         </div>
-        {props.replyIds.map((reply) => {
-          return <Reply key={reply._id} {...reply} />;
-        })}
+        <div>
+          {props.replyIds.map((reply) => {
+            return <Reply key={reply._id} {...reply} />;
+          })}
+        </div>
       </article>
       <article className="grid grid-cols-10 px-5">
         <div className="place-self-start">imogi</div>

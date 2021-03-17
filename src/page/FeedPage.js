@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // COMPONENTS
 import MainHeader from "../component/common/MainHeader";
@@ -6,11 +6,18 @@ import StoryContainer from "../component/feed/StoryContainer";
 import FeedContainer from "../component/feed/FeedContainer";
 import FriendRecommendationContainer from "../component/feed/FriendRecommendationContainer";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchFeeds } from "../store/actions/feed";
 
 const FeedPage = (props) => {
-  const navigationState = useSelector((state) => state.navigations);
-  console.log(navigationState);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFeeds());
+  }, []);
+  const allState = useSelector((state) => state);
+  console.log(allState);
 
   return (
     <>

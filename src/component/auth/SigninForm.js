@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { fetchPostAPI } from "../../utils/fetchApis";
 
+import { useHistory } from "react-router-dom";
+
 const SigninForm = () => {
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +20,7 @@ const SigninForm = () => {
         console.log(data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);

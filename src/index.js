@@ -11,9 +11,11 @@ import ReduxThunk from "redux-thunk";
 
 // REDUCERS
 import navigationReducer from "./store/reducers/navigation";
+import feedReducer from "./store/reducers/feed";
 
 const rootReducer = combineReducers({
   navigations: navigationReducer,
+  feeds: feedReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -22,7 +22,7 @@ const FeedContainer = (props) => {
   }, []);
 
   return (
-    <div className="mt-10 border-black border-2 border-solid ">
+    <div className="mt-10 border-black border-2 border-solid space-y-10">
       {feeds.map((feed) => {
         return <Feed key={feed._id} {...feed} />;
       })}
