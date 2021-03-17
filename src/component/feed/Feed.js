@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
 import Reply from "./Reply";
-import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
 import default_heart from "../../image/default_heart.s.png";
 import clicked_heart from "../../image/clicked_heart.s.png";
@@ -12,7 +11,12 @@ import default_share from "../../image/default_share.s.png";
 import clicked_share from "../../image/clicked_share.s.png";
 import default_setting from "../../image/default_setting.s.png";
 
+import { useDispatch } from "react-redux";
+import { addReply } from "../../store/actions/feed";
+
 const Feed = (props) => {
+  const dispatch = useDispatch();
+
   const [replyContent, setReplyContent] = useState("");
 
   const replyInputHandler = (e) => {
@@ -25,16 +29,7 @@ const Feed = (props) => {
       content: replyContent,
     };
 
-    fetchPostAPIWithJWT("/reply/", { body: bodyData })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(addReply(bodyData));
   };
 
   return (

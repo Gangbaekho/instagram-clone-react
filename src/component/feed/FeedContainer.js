@@ -4,26 +4,14 @@ import Feed from "./Feed";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
 
-const FeedContainer = (props) => {
-  const [feeds, setFeeds] = useState([]);
+import { useSelector, useDispatch } from "react-redux";
 
-  useEffect(() => {
-    fetch(`${SERVER_ADDRESS}/feed/`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setFeeds(data.feeds);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+const FeedContainer = (props) => {
+  const loadedFeeds = useSelector((state) => state.feeds.feeds);
 
   return (
     <div className="mt-10 border-black border-2 border-solid space-y-10">
-      {feeds.map((feed) => {
+      {loadedFeeds.map((feed) => {
         return <Feed key={feed._id} {...feed} />;
       })}
     </div>

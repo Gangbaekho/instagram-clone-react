@@ -25,16 +25,33 @@ export const fetchFeeds = () => {
 export const addReply = (data) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${SERVER_ADDRESS}/feed/`);
+      const response = await fetch(`${SERVER_ADDRESS}/reply/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      });
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
 
-      const resData = await response.json();
-      console.log(resData);
+      const reply = {
+        content: data.content,
+        feedId: data.feedId,
+        createdAt: new Date(),
+        likeCount: 0,
+        rereplyIds: [],
+        updatedAt: new Date(),
+        userId: localStorage.getItem("userId"),
+        userNickName: localStorage.getItem("userNickName"),
+        userProfileImageUrl: localStorage.getItem("userProfileImageUrl"),
+        _id: Date.now(),
+      };
 
-      dispatch({ type: SET_FEEDS, feeds: resData.feeds });
+      dispatch({ type: ADD_REPLY, reply: reply });
     } catch (err) {
       throw err;
     }
