@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
 import Reply from "./Reply";
@@ -16,6 +16,7 @@ import { addReply } from "../../store/actions/feed";
 
 const Feed = (props) => {
   const dispatch = useDispatch();
+  const myRef = useRef();
 
   const [replyContent, setReplyContent] = useState("");
 
@@ -23,13 +24,17 @@ const Feed = (props) => {
     setReplyContent(e.target.value);
   };
 
-  const replySubmitHandler = () => {
+  const replyFormHandler = (e) => {
+    e.preventDefault();
+
     const bodyData = {
       feedId: props._id,
       content: replyContent,
     };
 
     dispatch(addReply(bodyData));
+    myRef.current.value = "";
+    setReplyContent("");
   };
 
   return (
@@ -81,18 +86,20 @@ const Feed = (props) => {
           })}
         </div>
       </article>
-      <article className="grid grid-cols-10 px-5">
+      <form onSubmit={replyFormHandler} className="grid grid-cols-10 px-5">
         <div className="place-self-start">imogi</div>
         <input
           type="text"
           placeholder="text me!"
+          name="content"
           className="w-full col-span-8 place-self-center"
           onInput={replyInputHandler}
+          ref={myRef}
         />
         <div className="place-self-end">
-          <button onClick={replySubmitHandler}>Submit</button>
+          <button>Submit</button>
         </div>
-      </article>
+      </form>
     </section>
   );
 };
