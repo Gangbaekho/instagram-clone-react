@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
 import Reply from "./Reply";
@@ -14,9 +14,10 @@ import default_setting from "../../image/default_setting.s.png";
 import { useDispatch } from "react-redux";
 import { addReply } from "../../store/actions/feed";
 
+import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
+
 const Feed = (props) => {
   const dispatch = useDispatch();
-  const myRef = useRef();
 
   const [replyContent, setReplyContent] = useState("");
 
@@ -33,8 +34,25 @@ const Feed = (props) => {
     };
 
     dispatch(addReply(bodyData));
-    myRef.current.value = "";
+    e.target.elements.content.value = "";
     setReplyContent("");
+  };
+
+  const likeButtonHandler = () => {
+    const bodyData = {
+      feedId: props._id,
+    };
+
+    fetchPostAPIWithJWT("/feed/like", { body: bodyData })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -60,7 +78,7 @@ const Feed = (props) => {
       <article>
         <div className="flex justify-between items-center px-5 border-2 border-solid border-black">
           <div>
-            <button>
+            <button onClick={likeButtonHandler}>
               <img src={default_heart} className="w-10" />
             </button>
             <button>
@@ -94,7 +112,6 @@ const Feed = (props) => {
           name="content"
           className="w-full col-span-8 place-self-center"
           onInput={replyInputHandler}
-          ref={myRef}
         />
         <div className="place-self-end">
           <button>Submit</button>
