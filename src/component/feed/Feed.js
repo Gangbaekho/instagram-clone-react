@@ -17,6 +17,8 @@ import { addReply } from "../../store/actions/feed";
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
 const Feed = (props) => {
+  console.log("Feed props", props);
+
   const dispatch = useDispatch();
 
   const [replyContent, setReplyContent] = useState("");
@@ -43,7 +45,14 @@ const Feed = (props) => {
       feedId: props._id,
     };
 
-    fetchPostAPIWithJWT("/feed/like", { body: bodyData })
+    let requestEndpoint;
+    if (props.isHeartClicked) {
+      requestEndpoint = "/feed/like/decrease";
+    } else {
+      requestEndpoint = "/feed/like/increase";
+    }
+
+    fetchPostAPIWithJWT(requestEndpoint, { body: bodyData })
       .then((res) => {
         return res.json();
       })
@@ -79,7 +88,10 @@ const Feed = (props) => {
         <div className="flex justify-between items-center px-5 border-2 border-solid border-black">
           <div>
             <button onClick={likeButtonHandler}>
-              <img src={default_heart} className="w-10" />
+              <img
+                src={props.isHeartClicked ? clicked_heart : default_heart}
+                className="w-10"
+              />
             </button>
             <button>
               <img src={default_detail} className="w-10" />

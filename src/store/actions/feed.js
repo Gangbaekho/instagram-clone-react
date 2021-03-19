@@ -6,7 +6,12 @@ export const ADD_REPLY = "ADD_REPLY";
 export const fetchFeeds = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${SERVER_ADDRESS}/feed/`);
+      const response = await fetch(`${SERVER_ADDRESS}/feed/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Something went wrong!");

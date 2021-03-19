@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const FeedContainer = (props) => {
   const loadedFeeds = useSelector((state) => state.feeds.feeds);
+  console.log("loadedFeeds", loadedFeeds);
 
   return (
     <div className="mt-10 border-black border-2 border-solid space-y-10">
