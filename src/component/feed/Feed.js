@@ -12,7 +12,7 @@ import clicked_share from "../../image/clicked_share.s.png";
 import default_setting from "../../image/default_setting.s.png";
 
 import { useDispatch } from "react-redux";
-import { addReply } from "../../store/actions/feed";
+import { addReply, increaseLike, decreaseLike } from "../../store/actions/feed";
 
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
@@ -45,23 +45,11 @@ const Feed = (props) => {
       feedId: props._id,
     };
 
-    let requestEndpoint;
     if (props.isHeartClicked) {
-      requestEndpoint = "/feed/like/decrease";
+      dispatch(decreaseLike(bodyData));
     } else {
-      requestEndpoint = "/feed/like/increase";
+      dispatch(increaseLike(bodyData));
     }
-
-    fetchPostAPIWithJWT(requestEndpoint, { body: bodyData })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (

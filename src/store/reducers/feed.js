@@ -1,4 +1,9 @@
-import { ADD_REPLY, SET_FEEDS } from "../actions/feed";
+import {
+  ADD_REPLY,
+  DECREASE_LIKE,
+  INCREASE_LIKE,
+  SET_FEEDS,
+} from "../actions/feed";
 
 const initialState = {
   feeds: [],
@@ -11,13 +16,26 @@ export default (state = initialState, action) => {
         feeds: action.feeds,
       };
     case ADD_REPLY:
-      console.log("state.feeds", state.feeds);
-      console.log("action.feedId", action.reply);
       const updatedFeedIndex = state.feeds.findIndex((feed) => {
         return feed._id.toString() === action.reply.feedId;
       });
-      console.log("updatedFeedIndex", updatedFeedIndex);
       state.feeds[updatedFeedIndex].replyIds.push(action.reply);
+      return {
+        ...state,
+      };
+    case INCREASE_LIKE:
+      const updatedFeedIndexOne = state.feeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      state.feeds[updatedFeedIndexOne].isHeartClicked = true;
+      return {
+        ...state,
+      };
+    case DECREASE_LIKE:
+      const updatedFeedIndexTwo = state.feeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      state.feeds[updatedFeedIndexTwo].isHeartClicked = false;
       return {
         ...state,
       };

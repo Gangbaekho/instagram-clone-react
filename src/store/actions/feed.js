@@ -1,7 +1,11 @@
 import SERVER_ADDRESS from "../../constant/serverAddress";
 
+import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
+
 export const SET_FEEDS = "SET_FEEDS";
 export const ADD_REPLY = "ADD_REPLY";
+export const INCREASE_LIKE = "INCREASE_LIKE";
+export const DECREASE_LIKE = "DECREASE_LIKE";
 
 export const fetchFeeds = () => {
   return async (dispatch) => {
@@ -57,6 +61,50 @@ export const addReply = (data) => {
       };
 
       dispatch({ type: ADD_REPLY, reply: reply });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const increaseLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/feed/like/increase", {
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: INCREASE_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const decreaseLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/feed/like/decrease", {
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: DECREASE_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+      });
     } catch (err) {
       throw err;
     }
