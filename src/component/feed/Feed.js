@@ -96,7 +96,16 @@ const Feed = (props) => {
         </div>
         <div className="flex px-5 border-2 border-solid border-black">
           <div className="pr-2">{props.userNickName}</div>
-          <div className="pl-2">{props.content}</div>
+          <div className="pl-2">
+            {props.content.split("\n").map((p) => {
+              return (
+                <span>
+                  {p}
+                  <br />
+                </span>
+              );
+            })}
+          </div>
         </div>
         <div>
           {props.replyIds.map((reply) => {
