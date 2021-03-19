@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
         return feed._id.toString() === action.feedId;
       });
       state.feeds[updatedFeedIndexOne].isHeartClicked = true;
+      state.feeds[updatedFeedIndexOne].likeCount++;
       return {
         ...state,
       };
@@ -36,6 +37,7 @@ export default (state = initialState, action) => {
         return feed._id.toString() === action.feedId;
       });
       state.feeds[updatedFeedIndexTwo].isHeartClicked = false;
+      state.feeds[updatedFeedIndexTwo].likeCount--;
       return {
         ...state,
       };
