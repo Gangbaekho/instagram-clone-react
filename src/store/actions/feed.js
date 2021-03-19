@@ -6,6 +6,8 @@ export const SET_FEEDS = "SET_FEEDS";
 export const ADD_REPLY = "ADD_REPLY";
 export const INCREASE_LIKE = "INCREASE_LIKE";
 export const DECREASE_LIKE = "DECREASE_LIKE";
+export const INCREASE_REPLY_LIKE = "INCREASE_REPLY_LIKE";
+export const DECREASE_REPLY_LIKE = "DECREASE_REPLY_LIKE";
 
 export const fetchFeeds = () => {
   return async (dispatch) => {
@@ -104,6 +106,52 @@ export const decreaseLike = (data) => {
         type: DECREASE_LIKE,
         userId: localStorage.getItem("userId"),
         feedId: data.feedId,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const increaseReplyLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/reply/like/increase", {
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: INCREASE_REPLY_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+        replyId: data.replyId,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const decreaseReplyLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/reply/like/decrease", {
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: DECREASE_REPLY_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+        replyId: data.replyId,
       });
     } catch (err) {
       throw err;

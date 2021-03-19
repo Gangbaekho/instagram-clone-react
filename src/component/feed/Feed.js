@@ -100,7 +100,9 @@ const Feed = (props) => {
         </div>
         <div>
           {props.replyIds.map((reply) => {
-            return <Reply key={reply._id} {...reply} />;
+            return (
+              <Reply key={reply._id} {...reply} feedId={props._id.toString()} />
+            );
           })}
         </div>
       </article>

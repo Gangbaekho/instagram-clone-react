@@ -1,24 +1,30 @@
 import React from "react";
 
+import clicked_heart from "../../image/clicked_heart.s.png";
 import default_heart from "../../image/default_heart.s.png";
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
+import { useDispatch } from "react-redux";
+import { increaseReplyLike, decreaseReplyLike } from "../../store/actions/feed";
+
 const Reply = (props) => {
+  const dispatch = useDispatch();
+
+  const isHeartClicked =
+    props.likeUserIds.indexOf(localStorage.getItem("userId")) > -1;
+
   const likeButtonHandler = () => {
+    console.log(props._id.toString());
     const bodyData = {
-      replyId: props._id,
+      replyId: props._id.toString(),
+      feedId: props.feedId.toString(),
     };
 
-    fetchPostAPIWithJWT("/reply/like", { body: bodyData })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (isHeartClicked) {
+      dispatch(decreaseReplyLike(bodyData));
+    } else {
+      dispatch(increaseReplyLike(bodyData));
+    }
   };
 
   return (
@@ -29,7 +35,10 @@ const Reply = (props) => {
       </article>
       <article className="border-solid border-2 border-blue-200">
         <button onClick={likeButtonHandler}>
-          <img src={default_heart} className="w-6" />
+          <img
+            src={isHeartClicked ? clicked_heart : default_heart}
+            className="w-6"
+          />
         </button>
       </article>
     </section>

@@ -1,7 +1,9 @@
 import {
   ADD_REPLY,
   DECREASE_LIKE,
+  DECREASE_REPLY_LIKE,
   INCREASE_LIKE,
+  INCREASE_REPLY_LIKE,
   SET_FEEDS,
 } from "../actions/feed";
 
@@ -41,6 +43,44 @@ export default (state = initialState, action) => {
       return {
         ...state,
       };
+    case INCREASE_REPLY_LIKE:
+      const updatedFeedIndexThree = state.feeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      const updatedReplyIndex = state.feeds[
+        updatedFeedIndexThree
+      ].replyIds.findIndex((reply) => {
+        return reply._id.toString() === action.replyId;
+      });
+      state.feeds[updatedFeedIndexThree].replyIds[
+        updatedReplyIndex
+      ].likeUserIds.push(action.userId);
+      return {
+        ...state,
+      };
+    case DECREASE_REPLY_LIKE:
+      const updatedFeedIndexFour = state.feeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      const updatedReplyIndexOne = state.feeds[
+        updatedFeedIndexFour
+      ].replyIds.findIndex((reply) => {
+        return reply._id.toString() === action.replyId;
+      });
+      const filteredLikeUserIds = state.feeds[updatedFeedIndexFour].replyIds[
+        updatedReplyIndexOne
+      ].likeUserIds.filter((userId) => {
+        return userId.toString() !== action.userId;
+      });
+
+      state.feeds[updatedFeedIndexFour].replyIds[
+        updatedReplyIndexOne
+      ].likeUserIds = filteredLikeUserIds;
+
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
