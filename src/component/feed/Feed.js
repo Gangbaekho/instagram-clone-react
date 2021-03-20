@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
 import Reply from "./Reply";
@@ -128,6 +129,9 @@ const Feed = (props) => {
           <button>Submit</button>
         </div>
       </form>
+      <article>
+        <div>{moment(props.createdAt).fromNow()}</div>
+      </article>
     </section>
   );
 };
