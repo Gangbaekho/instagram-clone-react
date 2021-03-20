@@ -92,8 +92,9 @@ const Feed = (props) => {
             </button>
           </div>
         </div>
-        <div className="px-5 border-2 border-solid border-black">
-          LIKE COUNT: {props.likeCount}
+        <div className="px-5 border-2 border-solid border-black font-bold">
+          좋아요{" "}
+          {props.likeCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}개
         </div>
         <div className="flex px-5 border-2 border-solid border-black">
           <div className="pr-2">{props.userNickName}</div>
@@ -107,6 +108,17 @@ const Feed = (props) => {
               );
             })}
           </div>
+        </div>
+        <div className="text-gray-300 px-5">
+          <button
+            onClick={() => {
+              alert("모달창으로 변경!");
+            }}
+          >
+            {`댓글${props.replyTotalCount
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}개 모두 보기`}
+          </button>
         </div>
         <div>
           {props.replyIds.map((reply) => {

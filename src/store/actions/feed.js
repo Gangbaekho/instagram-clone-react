@@ -1,6 +1,7 @@
 import SERVER_ADDRESS from "../../constant/serverAddress";
 
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
+import moment from "moment";
 
 export const SET_FEEDS = "SET_FEEDS";
 export const ADD_REPLY = "ADD_REPLY";
@@ -55,11 +56,12 @@ export const addReply = (data) => {
         createdAt: new Date(),
         likeCount: 0,
         rereplyIds: [],
+        likeUserIds: [],
         updatedAt: new Date(),
         userId: localStorage.getItem("userId"),
         userNickName: localStorage.getItem("userNickName"),
         userProfileImageUrl: localStorage.getItem("userProfileImageUrl"),
-        _id: Date.now(),
+        _id: moment.now(),
       };
 
       dispatch({ type: ADD_REPLY, reply: reply });
