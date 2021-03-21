@@ -115,7 +115,7 @@ const Feed = (props) => {
               alert("모달창으로 변경!");
             }}
           >
-            {`댓글${props.replyTotalCount
+            {`댓글${props.replyCount
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}개 모두 보기`}
           </button>
