@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
@@ -18,9 +18,24 @@ import { addReply, increaseLike, decreaseLike } from "../../store/actions/feed";
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
 const Feed = (props) => {
-  console.log("Feed props", props);
-
   const dispatch = useDispatch();
+
+  const [isMore, setIsMore] = useState(false);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const observed = useRef(null);
+
+  useEffect(() => {
+    const {
+      offsetHeight,
+      scrollHeight,
+      offsetWidth,
+      scrollWidth,
+    } = observed.current;
+    const overFlowResult =
+      offsetHeight < scrollHeight || offsetWidth < scrollWidth;
+    setIsOverflow(overFlowResult);
+    console.log(isOverflow);
+  }, [observed]);
 
   const [replyContent, setReplyContent] = useState("");
 
@@ -98,15 +113,17 @@ const Feed = (props) => {
         </div>
         <div className="flex px-5 border-2 border-solid border-black">
           <div className="pr-2">{props.userNickName}</div>
-          <div className="pl-2">
-            {props.content.split("\n").map((p) => {
-              return (
-                <span>
-                  {p}
-                  <br />
-                </span>
-              );
-            })}
+          <div className="pl-2 truncate" ref={observed}>
+            {isMore
+              ? props.content.split("\n").map((p) => {
+                  return (
+                    <span>
+                      {p}
+                      <br />
+                    </span>
+                  );
+                })
+              : `${props.content.split("\n")[0]}`}
           </div>
         </div>
         <div className="text-gray-300 px-5">
