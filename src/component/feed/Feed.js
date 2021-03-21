@@ -34,7 +34,6 @@ const Feed = (props) => {
     const overFlowResult =
       offsetHeight < scrollHeight || offsetWidth < scrollWidth;
     setIsOverflow(overFlowResult);
-    console.log(isOverflow);
   }, [observed]);
 
   const [replyContent, setReplyContent] = useState("");
@@ -113,7 +112,7 @@ const Feed = (props) => {
         </div>
         <div className="flex px-5 border-2 border-solid border-black">
           <div className="pr-2">{props.userNickName}</div>
-          <div className="pl-2 truncate" ref={observed}>
+          <div className={`pl-2 ${isMore ? "" : "truncate"}`} ref={observed}>
             {isMore
               ? props.content.split("\n").map((p) => {
                   return (
@@ -124,6 +123,19 @@ const Feed = (props) => {
                   );
                 })
               : `${props.content.split("\n")[0]}`}
+            {isOverflow || props.content.split("\n").length > 1 ? (
+              <div className={`${isMore ? "hidden" : "block"}`}>
+                <button
+                  onClick={() => {
+                    setIsMore(true);
+                  }}
+                >
+                  더보기..
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="text-gray-300 px-5">
