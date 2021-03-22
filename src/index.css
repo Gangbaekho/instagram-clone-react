@@ -50,3 +50,16 @@
 .max-w-2xl {
   max-width: 1536px;
 }
+
+.scroll-hide {
+  overflow: auto;
+  /* this will hide the scrollbar in mozilla based browsers */
+  overflow: -moz-scrollbars-none;
+  /* this will hide the scrollbar in internet explorers */
+  -ms-overflow-style: none;
+}
+
+.scroll-hide::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}

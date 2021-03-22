@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
+import { Element } from "react-scroll";
+
 import default_user from "../image/default_user.s.png";
 import default_heart from "../image/default_heart.s.png";
 import default_detail from "../image/default_detail.s.png";
@@ -14,7 +16,7 @@ const TestPage = (props) => {
           <img src={default_user} className="h-full" />
         </div>
         <div className="border-black border-2 border-solid w-60 lg:h-detailFeed lg:w-80">
-          <article className="flex justify-center border-black border-2 border-solid">
+          <article className="flex justify-center border-black border-2 border-solid lg:h-1/12 ">
             <div className="border-black border-2 border-solid w-10">
               <img src={default_user} />
             </div>
@@ -25,22 +27,85 @@ const TestPage = (props) => {
           <article className="border-black border-2 border-solid lg:hidden">
             <img src={default_user} className="w-full" />
           </article>
-          <article className="hidden border-black border-2 border-solid lg:block">
-            글쓴이가 쓴 글
-          </article>
-          <article className="flex justify-between border-black border-2 border-solid">
-            <div className="border-black border-2 border-solid">
-              <img src={default_heart} className="w-10 inline-block" />
-              <img src={default_detail} className="w-10 inline-block" />
+          <Element
+            className="hidden border-black border-2 border-solid lg:block lg:h-9/12 scroll-hide"
+            id="scroll-container"
+            style={{
+              position: "relative",
+              overflow: "auto",
+              // overflowY: "scroll",
+            }}
+          >
+            <Element
+              name="scroll-container-first-element"
+              style={{
+                marginBottom: "200px",
+              }}
+            >
+              <div>
+                <h1>Test</h1>
+                <h2>Test</h2>
+                <p>ASDjlkasjdlkajslkdjaklsd</p>
+              </div>
+            </Element>
+
+            <Element
+              name="scroll-container-second-element"
+              style={{
+                marginBottom: "200px",
+              }}
+            >
+              second element inside container
+            </Element>
+          </Element>
+          {/* { <article className="hidden border-black border-2 border-solid lg:block lg:h-9/12">
+            <div className="border-2 border-solid border-black">
+              <Element
+                className="scroll-hide"
+                id="scroll-container"
+                style={{
+                  position: "relative",
+                  height: "200px",
+                  overflowY: "scroll",
+                }}
+              >
+                <Element
+                  name="scroll-container-first-element"
+                  style={{
+                    marginBottom: "200px",
+                  }}
+                >
+                  <div>
+                    <h1>Test</h1>
+                    <h2>Test</h2>
+                    <p>ASDjlkasjdlkajslkdjaklsd</p>
+                  </div>
+                </Element>
+
+                <Element
+                  name="scroll-container-second-element"
+                  style={{
+                    marginBottom: "200px",
+                  }}
+                >
+                  second element inside container
+                </Element>
+              </Element>
             </div>
-            <div className="border-black border-2 border-solid">
-              <img src={default_share} className="w-10 inline-block" />
+          </article>} */}
+          <article className="border-black border-2 border-solid lg:h-2/12">
+            <div className="flex justify-between border-black border-2 border-solid">
+              <div className="border-black border-2 border-solid">
+                <img src={default_heart} className="w-10 inline-block" />
+                <img src={default_detail} className="w-10 inline-block" />
+              </div>
+              <div className="border-black border-2 border-solid">
+                <img src={default_share} className="w-10 inline-block" />
+              </div>
             </div>
+            <div>좋아요 100개</div>
+            <div>2일전</div>
           </article>
-          <article className="border-black border-2 border-solid">
-            좋아요 100개
-          </article>
-          <article>2일전</article>
         </div>
       </div>
     </section>
