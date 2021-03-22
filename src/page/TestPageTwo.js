@@ -1,11 +1,45 @@
 import React from "react";
 
-import default_user from "../image/default_user.s.png";
+import {
+  Link,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
 
 const TestPageTwo = (props) => {
   return (
-    <div className="inline-block h-96 border-2 border-solid border-black">
-      <img src={default_user} className="h-full" />
+    <div className="border-2 border-solid border-black relative">
+      <Element
+        className="absolute top-0 -right-5"
+        id="scroll-container"
+        style={{
+          position: "relative",
+          height: "200px",
+          overflowY: "scroll",
+        }}
+      >
+        <Element
+          name="scroll-container-first-element"
+          style={{
+            marginBottom: "200px",
+          }}
+        >
+          first element inside container
+        </Element>
+
+        <Element
+          name="scroll-container-second-element"
+          style={{
+            marginBottom: "200px",
+          }}
+        >
+          second element inside container
+        </Element>
+      </Element>
     </div>
   );
 };

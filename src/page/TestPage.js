@@ -13,7 +13,7 @@ const TestPage = (props) => {
         <div className="hidden border-black border-2 border-solid lg:block lg:h-detailFeed">
           <img src={default_user} className="h-full" />
         </div>
-        <div className="border-black border-2 border-solid w-60 lg:h-detailFeed">
+        <div className="border-black border-2 border-solid w-60 lg:h-detailFeed lg:w-80">
           <article className="flex justify-center border-black border-2 border-solid">
             <div className="border-black border-2 border-solid w-10">
               <img src={default_user} />
