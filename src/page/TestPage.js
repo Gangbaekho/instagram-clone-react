@@ -58,41 +58,6 @@ const TestPage = (props) => {
               second element inside container
             </Element>
           </Element>
-          {/* { <article className="hidden border-black border-2 border-solid lg:block lg:h-9/12">
-            <div className="border-2 border-solid border-black">
-              <Element
-                className="scroll-hide"
-                id="scroll-container"
-                style={{
-                  position: "relative",
-                  height: "200px",
-                  overflowY: "scroll",
-                }}
-              >
-                <Element
-                  name="scroll-container-first-element"
-                  style={{
-                    marginBottom: "200px",
-                  }}
-                >
-                  <div>
-                    <h1>Test</h1>
-                    <h2>Test</h2>
-                    <p>ASDjlkasjdlkajslkdjaklsd</p>
-                  </div>
-                </Element>
-
-                <Element
-                  name="scroll-container-second-element"
-                  style={{
-                    marginBottom: "200px",
-                  }}
-                >
-                  second element inside container
-                </Element>
-              </Element>
-            </div>
-          </article>} */}
           <article className="border-black border-2 border-solid lg:h-3/12">
             <div className="flex justify-between border-black border-2 border-solid">
               <div className="border-black border-2 border-solid">
@@ -105,7 +70,7 @@ const TestPage = (props) => {
             </div>
             <div>좋아요 100개</div>
             <div>2일전</div>
-            <form className="grid grid-cols-6 px-5">
+            <form className="hidden lg:grid lg:grid-cols-6 lg:px-5">
               <div className="place-self-start">imogi</div>
               <input
                 type="text"
