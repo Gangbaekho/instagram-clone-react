@@ -28,7 +28,7 @@ const TestPage = (props) => {
             <img src={default_user} className="w-full" />
           </article>
           <Element
-            className="hidden border-black border-2 border-solid lg:block lg:h-9/12 scroll-hide"
+            className="hidden border-black border-2 border-solid lg:block lg:h-8/12 scroll-hide"
             id="scroll-container"
             style={{
               position: "relative",
@@ -93,7 +93,7 @@ const TestPage = (props) => {
               </Element>
             </div>
           </article>} */}
-          <article className="border-black border-2 border-solid lg:h-2/12">
+          <article className="border-black border-2 border-solid lg:h-3/12">
             <div className="flex justify-between border-black border-2 border-solid">
               <div className="border-black border-2 border-solid">
                 <img src={default_heart} className="w-10 inline-block" />
@@ -105,6 +105,18 @@ const TestPage = (props) => {
             </div>
             <div>좋아요 100개</div>
             <div>2일전</div>
+            <form className="grid grid-cols-6 px-5">
+              <div className="place-self-start">imogi</div>
+              <input
+                type="text"
+                placeholder="text me!"
+                name="content"
+                className="w-full col-span-4 place-self-center"
+              />
+              <div className="place-self-end">
+                <button>게시</button>
+              </div>
+            </form>
           </article>
         </div>
       </div>
