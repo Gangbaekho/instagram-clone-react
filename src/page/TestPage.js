@@ -11,11 +11,11 @@ const TestPage = (props) => {
   return (
     <section className="flex flex-col justify-center w-screen h-screen border-2 border-solid border-black bg-black relative">
       <div className="absolute top-10 right-10 bg-white">XICON</div>
-      <div className="flex justify-center mr-10 ml-10 border-black border-2 border-solid bg-white lg:h-detailFeed">
-        <div className="hidden border-black border-2 border-solid lg:block lg:h-detailFeed">
+      <div className="flex justify-center mr-10 ml-10 border-black border-2 border-solid bg-white lg:h-detailFeed lg:bg-black">
+        <div className="hidden border-black border-2 border-solid lg:block lg:h-detailFeed lg:bg-white">
           <img src={default_user} className="h-full" />
         </div>
-        <div className="border-black border-2 border-solid w-60 lg:h-detailFeed lg:w-80">
+        <div className="border-black border-2 border-solid w-60 lg:h-detailFeed lg:w-80 lg:bg-white">
           <article className="flex justify-center border-black border-2 border-solid lg:h-1/12 ">
             <div className="border-black border-2 border-solid w-10">
               <img src={default_user} />
