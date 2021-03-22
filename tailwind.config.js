@@ -14,6 +14,9 @@ module.exports = {
         xl: "36rem",
         "2xl": "42rem",
       },
+      height: {
+        detailFeed: "600px",
+      },
     },
   },
   variants: {

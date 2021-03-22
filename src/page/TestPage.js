@@ -9,18 +9,24 @@ const TestPage = (props) => {
   return (
     <section className="flex flex-col justify-center w-screen h-screen border-2 border-solid border-black bg-black relative">
       <div className="absolute top-10 right-10 bg-white">XICON</div>
-      <div className="flex justify-center mr-10 ml-10 border-black border-2 border-solid bg-white">
-        <div className="border-black border-2 border-solid w-60">
+      <div className="flex justify-center mr-10 ml-10 border-black border-2 border-solid bg-white lg:h-detailFeed">
+        <div className="hidden border-black border-2 border-solid lg:block lg:h-detailFeed">
+          <img src={default_user} className="h-full" />
+        </div>
+        <div className="border-black border-2 border-solid w-60 lg:h-detailFeed">
           <article className="flex justify-center border-black border-2 border-solid">
             <div className="border-black border-2 border-solid w-10">
               <img src={default_user} />
             </div>
             <div className="border-black border-2 border-solid">Ronaldo</div>
-            <div className="border-black border-2 border-solid">팔로잉</div>
+            <div className="border-black border-2 border-solid ">팔로잉</div>
             <div className="border-black border-2 border-solid">...</div>
           </article>
-          <article className="border-black border-2 border-solid">
+          <article className="border-black border-2 border-solid lg:hidden">
             <img src={default_user} className="w-full" />
+          </article>
+          <article className="hidden border-black border-2 border-solid lg:block">
+            글쓴이가 쓴 글
           </article>
           <article className="flex justify-between border-black border-2 border-solid">
             <div className="border-black border-2 border-solid">
