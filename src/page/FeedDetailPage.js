@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
 import FeedDetailReply from "../component/feed/FeedDetailReply";
@@ -13,30 +13,28 @@ import default_heart from "../image/default_heart.s.png";
 import default_detail from "../image/default_detail.s.png";
 import default_share from "../image/default_share.s.png";
 
-import {} from "../utils/fetchApis";
+import { addDetailFeed } from "../store/actions/detailFeed";
 
 const FeedDetailPage = (props) => {
+  const dispatch = useDispatch();
   const { params } = props.match;
 
+  const detailFeed = useSelector((state) =>
+    state.detailFeeds.detailFeeds.find((feed) => {
+      return feed._id === params.feedId;
+    })
+  );
   const [isLoading, setIsLoading] = useState(true);
-  const [feedDetail, setFeedDetail] = useState({});
+
+  const allState = useSelector((state) => state);
+  console.log(allState);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/feed/${params.feedId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setFeedDetail(data.feed);
-        setIsLoading(false);
-        console.log(data.feed);
-      });
-  }, []);
+    if (!detailFeed) {
+      return dispatch(addDetailFeed(params.feedId));
+    }
+    setIsLoading(false);
+  }, [detailFeed]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -48,7 +46,7 @@ const FeedDetailPage = (props) => {
       <div className="flex justify-center mr-10 ml-10 border-black border-2 border-solid bg-white lg:h-detailFeed lg:bg-black">
         <div className="hidden border-black border-2 border-solid lg:block lg:h-detailFeed lg:bg-white">
           <img
-            src={`${SERVER_ADDRESS}/${feedDetail.contentUrls[0]}`}
+            src={`${SERVER_ADDRESS}/${detailFeed.contentUrls[0]}`}
             // src={default_user}
             className="h-full"
           />
@@ -57,19 +55,19 @@ const FeedDetailPage = (props) => {
           <article className="flex justify-center border-black border-2 border-solid lg:h-1/12 ">
             <div className="border-black border-2 border-solid w-10">
               <img
-                src={`${SERVER_ADDRESS}/${feedDetail.userProfileImageUrl}`}
+                src={`${SERVER_ADDRESS}/${detailFeed.userProfileImageUrl}`}
                 // src={default_user}
               />
             </div>
             <div className="border-black border-2 border-solid">
-              {feedDetail.userNickName}
+              {detailFeed.userNickName}
             </div>
             <div className="border-black border-2 border-solid ">팔로잉</div>
             <div className="border-black border-2 border-solid">...</div>
           </article>
           <article className="border-black border-2 border-solid lg:hidden">
             <img
-              src={`${SERVER_ADDRESS}/${feedDetail.contentUrls[0]}`}
+              src={`${SERVER_ADDRESS}/${detailFeed.contentUrls[0]}`}
               //   src={default_user}
               className="w-full"
             />
@@ -89,7 +87,7 @@ const FeedDetailPage = (props) => {
                 marginBottom: "200px",
               }}
             >
-              {feedDetail.content}
+              {detailFeed.content}
             </Element>
 
             <Element
@@ -98,7 +96,7 @@ const FeedDetailPage = (props) => {
                 marginBottom: "200px",
               }}
             >
-              {feedDetail.replyIds.map((reply) => (
+              {detailFeed.replyIds.map((reply) => (
                 <FeedDetailReply key={reply._id} {...reply} />
               ))}
             </Element>
@@ -113,7 +111,7 @@ const FeedDetailPage = (props) => {
                 <img src={default_share} className="w-10 inline-block" />
               </div>
             </div>
-            <div>좋아요 {feedDetail.likeCount}개</div>
+            <div>좋아요 {detailFeed.likeCount}개</div>
             <div>{moment(props.createdAt).fromNow()}</div>
             <form className="hidden lg:grid lg:grid-cols-6 lg:px-5">
               <div className="place-self-start">imogi</div>

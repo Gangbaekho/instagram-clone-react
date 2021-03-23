@@ -12,10 +12,12 @@ import ReduxThunk from "redux-thunk";
 // REDUCERS
 import navigationReducer from "./store/reducers/navigation";
 import feedReducer from "./store/reducers/feed";
+import detailReducer from "./store/reducers/detailFeed";
 
 const rootReducer = combineReducers({
   navigations: navigationReducer,
   feeds: feedReducer,
+  detailFeeds: detailReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
