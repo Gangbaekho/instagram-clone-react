@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import moment from "moment";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
@@ -18,6 +19,7 @@ import { addReply, increaseLike, decreaseLike } from "../../store/actions/feed";
 import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
 const Feed = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [isMore, setIsMore] = useState(false);
@@ -141,7 +143,7 @@ const Feed = (props) => {
         <div className="text-gray-300 px-5">
           <button
             onClick={() => {
-              alert("모달창으로 변경!");
+              history.push(`/feed/${props._id}`);
             }}
           >
             {`댓글${props.replyCount
