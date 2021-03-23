@@ -2,7 +2,8 @@ import React from "react";
 
 import default_user from "../image/default_user.s.png";
 import default_heart from "../image/default_heart.s.png";
-const TestPageThree = (props) => {
+
+const FeedDetailReply = (props) => {
   return (
     <section class="grid grid-cols-6 border-2 border-solid border-black max-w-custom">
       <article className="border-2 border-black border-solid">
@@ -22,20 +23,18 @@ const TestPageThree = (props) => {
             </button>
           )}
           {props.recursiveExit === undefined && (
-            <div>
-              <TestPageThree recursiveExit={true} />
-            </div>
+            <TestPageThree recursiveExit={true} />
           )}
         </div>
       </article>
       <article className="border-2 border-black border-solid relative">
         <img
           src={default_heart}
-          className="w-5 absolute top-2 left-1/2 transform -translate-x-1/2"
+          className="w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
       </article>
     </section>
   );
 };
 
-export default TestPageThree;
+export default FeedDetailReply;
