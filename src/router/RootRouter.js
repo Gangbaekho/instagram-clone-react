@@ -14,6 +14,7 @@ import NotExistPage from "../page/NotExistPage";
 import TestPage from "../page/TestPage";
 import TestPageTwo from "../page/TestPageTwo";
 import TestPageThree from "../page/TestPageThree";
+import FeedDetailPage from "../page/FeedDetailPage";
 
 const RootRouter = () => {
   return (
@@ -31,6 +32,7 @@ const RootRouter = () => {
           <Route path="/test" component={TestPage} exact />
           <Route path="/test2" component={TestPageTwo} exact />
           <Route path="/test3" component={TestPageThree} exact />
+          <Route path="/feed/:feedId" component={FeedDetailPage} exact />
           <Route component={NotExistPage} />
         </Switch>
       </div>

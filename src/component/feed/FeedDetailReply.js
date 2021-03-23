@@ -1,7 +1,7 @@
 import React from "react";
 
-import default_user from "../image/default_user.s.png";
-import default_heart from "../image/default_heart.s.png";
+import default_user from "../../image/default_user.s.png";
+import default_heart from "../../image/default_heart.s.png";
 
 const FeedDetailReply = (props) => {
   return (
@@ -23,14 +23,16 @@ const FeedDetailReply = (props) => {
             </button>
           )}
           {props.recursiveExit === undefined && (
-            <TestPageThree recursiveExit={true} />
+            <div>
+              <FeedDetailReply recursiveExit={true} />
+            </div>
           )}
         </div>
       </article>
       <article className="border-2 border-black border-solid relative">
         <img
           src={default_heart}
-          className="w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="w-5 absolute top-2 left-1/2 transform -translate-x-1/2"
         />
       </article>
     </section>
