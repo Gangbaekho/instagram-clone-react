@@ -24,15 +24,23 @@ const FeedDetailPage = (props) => {
     (feed) => feed._id === params.feedId
   );
 
-  if (!detailFeeds.detailFeeds.find((feed) => feed._id === params.feedId)) {
-    dispatch(addDetailFeed(params.feedId));
-    return <div>Loading...</div>;
-  }
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(async () => {
+    if (isLoading) {
+      await dispatch(addDetailFeed(params.feedId));
+      setIsLoading(false);
+    }
+  }, []);
 
   const moreReplyButtonHandler = () => {
     if (detailFeed.replyCount === 0) return alert("replyCount가 0이래");
     dispatch(addMoreReply(detailFeed._id, detailFeed.fetchedReplyCount));
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section className="flex flex-col justify-center w-screen h-screen border-2 border-solid border-black bg-black relative">
