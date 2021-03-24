@@ -38,6 +38,8 @@ const FeedDetailPage = (props) => {
     dispatch(addMoreReply(detailFeed._id, detailFeed.fetchedReplyCount));
   };
 
+  const replyFormHandler = (e) => {};
+
   if (isLoading) {
     return <div>Loading...</div>;
   }

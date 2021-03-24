@@ -1,9 +1,16 @@
 import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { TEST_ACTION } from "../store/actions/test";
 
 const TestPageThree = (props) => {
-  return <div>Test3</div>;
+  const dispatch = useDispatch();
+  return (
+    <div>
+      test3
+      <button onClick={() => dispatch({ type: TEST_ACTION })}>dispatch!</button>
+    </div>
+  );
 };
 
 export default TestPageThree;

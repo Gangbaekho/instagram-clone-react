@@ -13,12 +13,16 @@ import ReduxThunk from "redux-thunk";
 import navigationReducer from "./store/reducers/navigation";
 import feedReducer from "./store/reducers/feed";
 import detailReducer from "./store/reducers/detailFeed";
+import testOneReducer from "./store/reducers/testOne";
+import testTwoReducer from "./store/reducers/testTwo";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   navigations: navigationReducer,
   feeds: feedReducer,
   detailFeeds: detailReducer,
+  testOne: testOneReducer,
+  testTwo: testTwoReducer,
 });
 
 const store = createStore(
