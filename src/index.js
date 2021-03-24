@@ -13,14 +13,20 @@ import ReduxThunk from "redux-thunk";
 import navigationReducer from "./store/reducers/navigation";
 import feedReducer from "./store/reducers/feed";
 import detailReducer from "./store/reducers/detailFeed";
+import testReducer from "./store/reducers/test";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   navigations: navigationReducer,
   feeds: feedReducer,
   detailFeeds: detailReducer,
+  test: testReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>

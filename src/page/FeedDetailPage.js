@@ -13,37 +13,26 @@ import default_heart from "../image/default_heart.s.png";
 import default_detail from "../image/default_detail.s.png";
 import default_share from "../image/default_share.s.png";
 
-import { addDetailFeed } from "../store/actions/detailFeed";
+import { addDetailFeed, addMoreReply } from "../store/actions/detailFeed";
 
 const FeedDetailPage = (props) => {
   const dispatch = useDispatch();
+  const detailFeeds = useSelector((state) => state.detailFeeds);
   const { params } = props.match;
 
-  const detailFeed = useSelector((state) =>
-    state.detailFeeds.detailFeeds.find((feed) => {
-      return feed._id === params.feedId;
-    })
+  const detailFeed = detailFeeds.detailFeeds.find(
+    (feed) => feed._id === params.feedId
   );
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (!detailFeed) {
-      return dispatch(addDetailFeed(params.feedId));
-    }
-    setIsLoading(false);
-  }, [detailFeed]);
-
-  const moreReplyButtonHandler = () => {
-    const { replyCount, fetchedReplyCount } = detailFeed;
-    if (replyCount - 5 < 0) {
-      fetchedReplyCount += replyCount;
-      replyCount = 0;
-    }
-  };
-
-  if (isLoading) {
+  if (!detailFeeds.detailFeeds.find((feed) => feed._id === params.feedId)) {
+    dispatch(addDetailFeed(params.feedId));
     return <div>Loading...</div>;
   }
+
+  const moreReplyButtonHandler = () => {
+    if (detailFeed.replyCount === 0) return alert("replyCount가 0이래");
+    dispatch(addMoreReply(detailFeed._id, detailFeed.fetchedReplyCount));
+  };
 
   return (
     <section className="flex flex-col justify-center w-screen h-screen border-2 border-solid border-black bg-black relative">
@@ -98,7 +87,7 @@ const FeedDetailPage = (props) => {
 
             {detailFeed.replyCount > 0 && (
               <Element className="text-center">
-                <button>더보기 버튼!</button>
+                <button onClick={moreReplyButtonHandler}>더보기 버튼!</button>
               </Element>
             )}
           </Element>

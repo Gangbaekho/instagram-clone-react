@@ -1,12 +1,25 @@
 import React from "react";
 
-import default_user from "../image/default_user.s.png";
-import default_heart from "../image/default_heart.s.png";
+import { useSelector, useDispatch } from "react-redux";
+
 const TestPageThree = (props) => {
+  const dispatch = useDispatch();
+  const testState = useSelector((state) => state.test);
+
+  if (!testState.persons.find((person) => person.name === "jinsoo")) {
+    dispatch({ type: "SETUP" });
+    return <div>Loading...</div>;
+  }
+
+  const myPerson = testState.persons.find((person) => person.name === "jinsoo");
+
   return (
     <div>
-      Hello
-      {1 > 0 && <div>조건부 div</div>}
+      {myPerson.hello.map((item) => {
+        return <div key={item}>{item}</div>;
+      })}
+      <button onClick={() => dispatch({ type: "INCREASE" })}>INCREASE</button>
+      <button onClick={() => dispatch({ type: "DECREASE" })}>DESCREASE</button>
     </div>
   );
 };
