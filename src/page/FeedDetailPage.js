@@ -26,9 +26,6 @@ const FeedDetailPage = (props) => {
   );
   const [isLoading, setIsLoading] = useState(true);
 
-  const allState = useSelector((state) => state);
-  console.log(allState);
-
   useEffect(() => {
     if (!detailFeed) {
       return dispatch(addDetailFeed(params.feedId));
@@ -81,24 +78,18 @@ const FeedDetailPage = (props) => {
               // overflowY: "scroll",
             }}
           >
-            <Element
-              name="scroll-container-first-element"
-              style={{
-                marginBottom: "200px",
-              }}
-            >
+            <Element name="scroll-container-first-element">
               {detailFeed.content}
             </Element>
 
-            <Element
-              name="scroll-container-second-element"
-              style={{
-                marginBottom: "200px",
-              }}
-            >
+            <Element name="scroll-container-second-element">
               {detailFeed.replyIds.map((reply) => (
                 <FeedDetailReply key={reply._id} {...reply} />
               ))}
+            </Element>
+
+            <Element className="text-center">
+              <button>더보기 버튼!</button>
             </Element>
           </Element>
           <article className="border-black border-2 border-solid lg:h-3/12">
