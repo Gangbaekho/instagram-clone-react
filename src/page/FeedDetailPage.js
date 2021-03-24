@@ -33,6 +33,14 @@ const FeedDetailPage = (props) => {
     setIsLoading(false);
   }, [detailFeed]);
 
+  const moreReplyButtonHandler = () => {
+    const { replyCount, fetchedReplyCount } = detailFeed;
+    if (replyCount - 5 < 0) {
+      fetchedReplyCount += replyCount;
+      replyCount = 0;
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -88,9 +96,11 @@ const FeedDetailPage = (props) => {
               ))}
             </Element>
 
-            <Element className="text-center">
-              <button>더보기 버튼!</button>
-            </Element>
+            {detailFeed.replyCount > 0 && (
+              <Element className="text-center">
+                <button>더보기 버튼!</button>
+              </Element>
+            )}
           </Element>
           <article className="border-black border-2 border-solid lg:h-3/12">
             <div className="flex justify-between border-black border-2 border-solid">
