@@ -5,7 +5,13 @@ import default_heart from "../../image/default_heart.s.png";
 
 import moment from "moment";
 
+import { REREPLY } from "../../constant/replyType";
+
 const FeedDetailReply = (props) => {
+  const changeReplyTypeAndParentIdHandler = () => {
+    props.changeReplyTypeAndParentIdHandler(REREPLY, props._id);
+  };
+
   return (
     <section className="grid grid-cols-6 border-2 border-solid border-black max-w-custom">
       <article className="border-2 border-black border-solid">
@@ -16,7 +22,12 @@ const FeedDetailReply = (props) => {
         <div>
           <span className="text-sm">{moment(props.createdAt).fromNow()}</span>
           <span className="text-sm">좋아요 {props.likeCount}개</span>
-          <button className="text-sm">답글 달기 버튼</button>
+          <button
+            className="text-sm"
+            onClick={changeReplyTypeAndParentIdHandler}
+          >
+            답글 달기 버튼
+          </button>
         </div>
         <div>
           {props.recursiveExit === undefined && (

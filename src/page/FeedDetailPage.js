@@ -14,6 +14,8 @@ import default_detail from "../image/default_detail.s.png";
 import default_share from "../image/default_share.s.png";
 
 import { addDetailFeed, addMoreReply } from "../store/actions/detailFeed";
+import { REPLY } from "../constant/replyType";
+import { fetchPostAPIWithJWT } from "../utils/fetchApis";
 
 const FeedDetailPage = (props) => {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ const FeedDetailPage = (props) => {
   );
 
   const [isLoading, setIsLoading] = useState(true);
+  const [replyType, setReplyType] = useState(REPLY);
+  const [parentId, setParentId] = useState(params.feedId);
 
   useEffect(async () => {
     if (isLoading) {
@@ -38,7 +42,44 @@ const FeedDetailPage = (props) => {
     dispatch(addMoreReply(detailFeed._id, detailFeed.fetchedReplyCount));
   };
 
-  const replyFormHandler = (e) => {};
+  const addReplyHandler = (e) => {
+    e.preventDefault();
+    const content = e.target.elements.content.value;
+
+    if (replyType === REPLY) {
+      fetchPostAPIWithJWT("/reply/", {
+        body: { feedId: parentId, content: content },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      return;
+    }
+
+    fetchPostAPIWithJWT("/reply/rereply", {
+      body: { replyId: parentId, content: content },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const changeReplyTypeAndParentIdHandler = (replyType, parentId) => {
+    setReplyType(replyType);
+    setParentId(parentId);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -91,7 +132,13 @@ const FeedDetailPage = (props) => {
 
             <Element name="scroll-container-second-element">
               {detailFeed.replyIds.map((reply) => (
-                <FeedDetailReply key={reply._id} {...reply} />
+                <FeedDetailReply
+                  key={reply._id}
+                  {...reply}
+                  changeReplyTypeAndParentIdHandler={
+                    changeReplyTypeAndParentIdHandler
+                  }
+                />
               ))}
             </Element>
 
@@ -113,7 +160,10 @@ const FeedDetailPage = (props) => {
             </div>
             <div>좋아요 {detailFeed.likeCount}개</div>
             <div>{moment(props.createdAt).fromNow()}</div>
-            <form className="hidden lg:grid lg:grid-cols-6 lg:px-5">
+            <form
+              onSubmit={addReplyHandler}
+              className="hidden lg:grid lg:grid-cols-6 lg:px-5"
+            >
               <div className="place-self-start">imogi</div>
               <input
                 type="text"
