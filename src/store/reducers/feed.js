@@ -52,9 +52,12 @@ export default (state = initialState, action) => {
       ].replyIds.findIndex((reply) => {
         return reply._id.toString() === action.replyId;
       });
-      state.feeds[updatedFeedIndexThree].replyIds[
-        updatedReplyIndex
-      ].likeUserIds.push(action.userId);
+      if (updatedReplyIndex >= 0) {
+        state.feeds[updatedFeedIndexThree].replyIds[
+          updatedReplyIndex
+        ].likeUserIds.push(action.userId);
+      }
+
       return {
         ...state,
       };
@@ -67,16 +70,17 @@ export default (state = initialState, action) => {
       ].replyIds.findIndex((reply) => {
         return reply._id.toString() === action.replyId;
       });
-      const filteredLikeUserIds = state.feeds[updatedFeedIndexFour].replyIds[
-        updatedReplyIndexOne
-      ].likeUserIds.filter((userId) => {
-        return userId.toString() !== action.userId;
-      });
+      if (updatedReplyIndexOne >= 0) {
+        const filteredLikeUserIds = state.feeds[updatedFeedIndexFour].replyIds[
+          updatedReplyIndexOne
+        ].likeUserIds.filter((userId) => {
+          return userId.toString() !== action.userId;
+        });
 
-      state.feeds[updatedFeedIndexFour].replyIds[
-        updatedReplyIndexOne
-      ].likeUserIds = filteredLikeUserIds;
-
+        state.feeds[updatedFeedIndexFour].replyIds[
+          updatedReplyIndexOne
+        ].likeUserIds = filteredLikeUserIds;
+      }
       return {
         ...state,
       };

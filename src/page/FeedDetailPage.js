@@ -12,11 +12,12 @@ import default_user from "../image/default_user.s.png";
 import default_heart from "../image/default_heart.s.png";
 import default_detail from "../image/default_detail.s.png";
 import default_share from "../image/default_share.s.png";
+import clicked_heart from "../image/clicked_heart.s.png";
 
 import { addDetailFeed, addMoreReply } from "../store/actions/detailFeed";
 import { REPLY, REREPLY } from "../constant/replyType";
 import { fetchPostAPIWithJWT } from "../utils/fetchApis";
-import { addReply } from "../store/actions/feed";
+import { addReply, decreaseLike, increaseLike } from "../store/actions/feed";
 import { addRereply } from "../store/actions/detailFeed";
 
 const FeedDetailPage = (props) => {
@@ -68,34 +69,23 @@ const FeedDetailPage = (props) => {
       dispatch(addRereply(bodyData));
       e.target.elements.content.value = "";
     }
-
-    // if ((replyType = REREPLY)) {
-    //   const bodyDataTwo = {
-    //     parentReplyId: parentId,
-    //     feedId: params.feedId,
-    //     content: content,
-    //   };
-
-    //   dispatch(addRereply(bodyDataTwo));
-    //   e.target.elements.content.value = "";
-    // }
-    // fetchPostAPIWithJWT("/reply/rereply", {
-    //   body: { replyId: parentId, content: content },
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   const changeReplyTypeAndParentIdHandler = (replyType, parentId) => {
     setReplyType(replyType);
     setParentId(parentId);
+  };
+
+  const likeButtonHandler = () => {
+    const bodyData = {
+      feedId: detailFeed._id,
+    };
+
+    if (detailFeed.isHeartClicked) {
+      dispatch(decreaseLike(bodyData));
+    } else {
+      dispatch(increaseLike(bodyData));
+    }
   };
 
   if (isLoading) {
@@ -168,7 +158,15 @@ const FeedDetailPage = (props) => {
           <article className="border-black border-2 border-solid lg:h-3/12">
             <div className="flex justify-between border-black border-2 border-solid">
               <div className="border-black border-2 border-solid">
-                <img src={default_heart} className="w-10 inline-block" />
+                <button onClick={likeButtonHandler}>
+                  <img
+                    src={
+                      detailFeed.isHeartClicked ? clicked_heart : default_heart
+                    }
+                    className="w-10 inline-block"
+                  />
+                </button>
+
                 <img src={default_detail} className="w-10 inline-block" />
               </div>
               <div className="border-black border-2 border-solid">

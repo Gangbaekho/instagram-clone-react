@@ -4,7 +4,14 @@ import {
   ADD_MORE_REREPLY,
   ADD_REREPLY,
 } from "../actions/detailFeed";
-import { ADD_REPLY } from "../actions/feed";
+
+import {
+  ADD_REPLY,
+  INCREASE_LIKE,
+  DECREASE_LIKE,
+  INCREASE_REPLY_LIKE,
+  DECREASE_REPLY_LIKE,
+} from "../actions/feed";
 
 const initialState = {
   detailFeeds: [],
@@ -75,17 +82,68 @@ export default (state = initialState, action) => {
         });
         targetReply.rereplyCount -= action.replies.length;
       }
+    case INCREASE_LIKE:
+      const updatedFeedIndexOne = state.detailFeeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      state.detailFeeds[updatedFeedIndexOne].isHeartClicked = true;
+      state.detailFeeds[updatedFeedIndexOne].likeCount++;
       return {
         ...state,
       };
-    // action.replies.forEach((reply) => {
-    //   detailFeedTwo.replyIds.push(reply);
-    // });
-    // detailFeedTwo.replyCount -= action.replies.length;
-    // detailFeedTwo.fetchedReplyCount += action.replies.length;
-    // return {
-    //   ...state,
-    // };
+    case DECREASE_LIKE:
+      const updatedFeedIndexTwo = state.detailFeeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      state.detailFeeds[updatedFeedIndexTwo].isHeartClicked = false;
+      state.detailFeeds[updatedFeedIndexTwo].likeCount--;
+      return {
+        ...state,
+      };
+    case INCREASE_REPLY_LIKE:
+      const updatedFeedIndexThree = state.detailFeeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      if (updatedFeedIndexThree >= 0) {
+        const updatedReplyIndex = state.detailFeeds[
+          updatedFeedIndexThree
+        ].replyIds.findIndex((reply) => {
+          return reply._id.toString() === action.replyId;
+        });
+
+        state.detailFeeds[updatedFeedIndexThree].replyIds[
+          updatedReplyIndex
+        ].likeUserIds.push(action.userId);
+      }
+
+      return {
+        ...state,
+      };
+    case DECREASE_REPLY_LIKE:
+      const updatedFeedIndexFour = state.detailFeeds.findIndex((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      if (updatedFeedIndexFour >= 0) {
+        const updatedReplyIndexOne = state.detailFeeds[
+          updatedFeedIndexFour
+        ].replyIds.findIndex((reply) => {
+          return reply._id.toString() === action.replyId;
+        });
+        const filteredLikeUserIds = state.detailFeeds[
+          updatedFeedIndexFour
+        ].replyIds[updatedReplyIndexOne].likeUserIds.filter((userId) => {
+          return userId.toString() !== action.userId;
+        });
+
+        state.detailFeeds[updatedFeedIndexFour].replyIds[
+          updatedReplyIndexOne
+        ].likeUserIds = filteredLikeUserIds;
+      }
+
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
