@@ -16,6 +16,7 @@ import default_share from "../image/default_share.s.png";
 import { addDetailFeed, addMoreReply } from "../store/actions/detailFeed";
 import { REPLY } from "../constant/replyType";
 import { fetchPostAPIWithJWT } from "../utils/fetchApis";
+import { addReply } from "../store/actions/feed";
 
 const FeedDetailPage = (props) => {
   const dispatch = useDispatch();
@@ -47,19 +48,15 @@ const FeedDetailPage = (props) => {
     const content = e.target.elements.content.value;
 
     if (replyType === REPLY) {
-      fetchPostAPIWithJWT("/reply/", {
-        body: { feedId: parentId, content: content },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      return;
+      e.preventDefault();
+
+      const bodyData = {
+        feedId: parentId,
+        content: content,
+      };
+
+      dispatch(addReply(bodyData));
+      e.target.elements.content.value = "";
     }
 
     fetchPostAPIWithJWT("/reply/rereply", {

@@ -30,16 +30,22 @@ const FeedDetailReply = (props) => {
           </button>
         </div>
         <div>
-          {props.recursiveExit === undefined && (
+          {props.recursiveExit === undefined && props.rereplyCount > 0 && (
             <button className="text-sm">
-              ---&nbsp;&nbsp;&nbsp;답글 보기(8개)
+              ---&nbsp;&nbsp;&nbsp;답글 보기({props.rereplyCount}개)
             </button>
           )}
-          {props.recursiveExit === undefined && (
-            <div>
-              <FeedDetailReply recursiveExit={true} />
-            </div>
-          )}
+          {
+            props.recursiveExit === undefined &&
+              props.rereplyIds.map((rereply) => (
+                <FeedDetailReply recursiveExit={true} {...rereply} />
+              ))
+            // (
+            //   <div>
+            //     <FeedDetailReply recursiveExit={true} />
+            //   </div>
+            // )
+          }
         </div>
       </article>
       <article className="border-2 border-black border-solid relative">

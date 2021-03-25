@@ -1,4 +1,5 @@
 import { ADD_DETAIL_FEED, ADD_MORE_REPLY } from "../actions/detailFeed";
+import { ADD_REPLY } from "../actions/feed";
 
 const initialState = {
   detailFeeds: [],
@@ -30,6 +31,16 @@ export default (state = initialState, action) => {
       });
       detailFeed.replyCount -= action.replies.length;
       detailFeed.fetchedReplyCount += action.replies.length;
+      return {
+        ...state,
+      };
+    case ADD_REPLY:
+      const updatedFeed = state.detailFeeds.find((feed) => {
+        return feed._id.toString() === action.reply.feedId;
+      });
+      if (updatedFeed) {
+        updatedFeed.replyIds.push(action.reply);
+      }
       return {
         ...state,
       };
