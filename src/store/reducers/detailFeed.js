@@ -86,8 +86,10 @@ export default (state = initialState, action) => {
       const updatedFeedIndexOne = state.detailFeeds.findIndex((feed) => {
         return feed._id.toString() === action.feedId;
       });
-      state.detailFeeds[updatedFeedIndexOne].isHeartClicked = true;
-      state.detailFeeds[updatedFeedIndexOne].likeCount++;
+      if (updatedFeedIndexOne >= 0) {
+        state.detailFeeds[updatedFeedIndexOne].isHeartClicked = true;
+        state.detailFeeds[updatedFeedIndexOne].likeCount++;
+      }
       return {
         ...state,
       };
@@ -95,8 +97,10 @@ export default (state = initialState, action) => {
       const updatedFeedIndexTwo = state.detailFeeds.findIndex((feed) => {
         return feed._id.toString() === action.feedId;
       });
-      state.detailFeeds[updatedFeedIndexTwo].isHeartClicked = false;
-      state.detailFeeds[updatedFeedIndexTwo].likeCount--;
+      if (updatedFeedIndexTwo >= 0) {
+        state.detailFeeds[updatedFeedIndexTwo].isHeartClicked = false;
+        state.detailFeeds[updatedFeedIndexTwo].likeCount--;
+      }
       return {
         ...state,
       };
