@@ -7,9 +7,22 @@ import moment from "moment";
 
 import { REREPLY } from "../../constant/replyType";
 
+import { useDispatch } from "react-redux";
+import { addMoreRereply } from "../../store/actions/detailFeed";
+
 const FeedDetailReply = (props) => {
+  const dispatch = useDispatch();
+
   const changeReplyTypeAndParentIdHandler = () => {
     props.changeReplyTypeAndParentIdHandler(REREPLY, props._id);
+  };
+
+  const showMoreRereplyHandler = () => {
+    const feedId = props.feedId;
+    const replyId = props._id;
+    const skip = props.rereplyIds.length;
+
+    dispatch(addMoreRereply({ feedId: feedId, replyId: replyId, skip: skip }));
   };
 
   return (
@@ -22,16 +35,18 @@ const FeedDetailReply = (props) => {
         <div>
           <span className="text-sm">{moment(props.createdAt).fromNow()}</span>
           <span className="text-sm">좋아요 {props.likeCount}개</span>
-          <button
-            className="text-sm"
-            onClick={changeReplyTypeAndParentIdHandler}
-          >
-            답글 달기 버튼
-          </button>
+          {props.recursiveExit === undefined && (
+            <button
+              className="text-sm"
+              onClick={changeReplyTypeAndParentIdHandler}
+            >
+              답글 달기 버튼
+            </button>
+          )}
         </div>
         <div>
           {props.recursiveExit === undefined && props.rereplyCount > 0 && (
-            <button className="text-sm">
+            <button className="text-sm" onClick={showMoreRereplyHandler}>
               ---&nbsp;&nbsp;&nbsp;답글 보기({props.rereplyCount}개)
             </button>
           )}

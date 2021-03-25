@@ -1,6 +1,7 @@
 import {
   ADD_DETAIL_FEED,
   ADD_MORE_REPLY,
+  ADD_MORE_REREPLY,
   ADD_REREPLY,
 } from "../actions/detailFeed";
 import { ADD_REPLY } from "../actions/feed";
@@ -61,6 +62,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
       };
+    case ADD_MORE_REREPLY:
+      const detailFeedTwo = state.detailFeeds.find(
+        (feed) => feed._id.toString() === action.feedId
+      );
+      if (detailFeedTwo) {
+        const targetReply = detailFeedTwo.replyIds.find(
+          (reply) => reply._id.toString() === action.replyId
+        );
+        action.replies.forEach((rereply) => {
+          targetReply.rereplyIds.push(rereply);
+        });
+        targetReply.rereplyCount -= action.replies.length;
+      }
+      return {
+        ...state,
+      };
+    // action.replies.forEach((reply) => {
+    //   detailFeedTwo.replyIds.push(reply);
+    // });
+    // detailFeedTwo.replyCount -= action.replies.length;
+    // detailFeedTwo.fetchedReplyCount += action.replies.length;
+    // return {
+    //   ...state,
+    // };
     default:
       return state;
   }

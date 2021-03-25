@@ -5,6 +5,7 @@ import moment from "moment";
 export const ADD_DETAIL_FEED = "SET_DETAIL_FEED";
 export const ADD_MORE_REPLY = "ADD_MORE_REPLY";
 export const ADD_REREPLY = "ADD_REREPLY";
+export const ADD_MORE_REREPLY = "ADD_MORE_REREPLY";
 
 export const addDetailFeed = (feedId) => {
   return async (dispatch) => {
@@ -92,6 +93,39 @@ export const addRereply = (data) => {
       };
 
       dispatch({ type: ADD_REREPLY, reply: reply });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const addMoreRereply = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${SERVER_ADDRESS}/reply/${data.replyId}/rereply`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ skip: data.skip }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const resData = await response.json();
+
+      dispatch({
+        type: ADD_MORE_REREPLY,
+        feedId: data.feedId,
+        replyId: data.replyId,
+        replies: resData.replies,
+      });
     } catch (err) {
       throw err;
     }
