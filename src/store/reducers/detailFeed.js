@@ -1,4 +1,8 @@
-import { ADD_DETAIL_FEED, ADD_MORE_REPLY } from "../actions/detailFeed";
+import {
+  ADD_DETAIL_FEED,
+  ADD_MORE_REPLY,
+  ADD_REREPLY,
+} from "../actions/detailFeed";
 import { ADD_REPLY } from "../actions/feed";
 
 const initialState = {
@@ -40,6 +44,19 @@ export default (state = initialState, action) => {
       });
       if (updatedFeed) {
         updatedFeed.replyIds.push(action.reply);
+      }
+      return {
+        ...state,
+      };
+    case ADD_REREPLY:
+      const updatedFeedOne = state.detailFeeds.find((feed) => {
+        return feed._id.toString() === action.reply.feedId;
+      });
+      if (updatedFeedOne) {
+        const updatedReply = updatedFeedOne.replyIds.find(
+          (reply) => reply._id.toString() === action.reply.parentReplyId
+        );
+        updatedReply.rereplyIds.push(action.reply);
       }
       return {
         ...state,

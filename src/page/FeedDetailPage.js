@@ -14,9 +14,10 @@ import default_detail from "../image/default_detail.s.png";
 import default_share from "../image/default_share.s.png";
 
 import { addDetailFeed, addMoreReply } from "../store/actions/detailFeed";
-import { REPLY } from "../constant/replyType";
+import { REPLY, REREPLY } from "../constant/replyType";
 import { fetchPostAPIWithJWT } from "../utils/fetchApis";
 import { addReply } from "../store/actions/feed";
+import { addRereply } from "../store/actions/detailFeed";
 
 const FeedDetailPage = (props) => {
   const dispatch = useDispatch();
@@ -48,8 +49,6 @@ const FeedDetailPage = (props) => {
     const content = e.target.elements.content.value;
 
     if (replyType === REPLY) {
-      e.preventDefault();
-
       const bodyData = {
         feedId: parentId,
         content: content,
@@ -59,18 +58,39 @@ const FeedDetailPage = (props) => {
       e.target.elements.content.value = "";
     }
 
-    fetchPostAPIWithJWT("/reply/rereply", {
-      body: { replyId: parentId, content: content },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (replyType === REREPLY) {
+      const bodyData = {
+        replyId: parentId,
+        feedId: params.feedId,
+        content: content,
+      };
+
+      dispatch(addRereply(bodyData));
+      e.target.elements.content.value = "";
+    }
+
+    // if ((replyType = REREPLY)) {
+    //   const bodyDataTwo = {
+    //     parentReplyId: parentId,
+    //     feedId: params.feedId,
+    //     content: content,
+    //   };
+
+    //   dispatch(addRereply(bodyDataTwo));
+    //   e.target.elements.content.value = "";
+    // }
+    // fetchPostAPIWithJWT("/reply/rereply", {
+    //   body: { replyId: parentId, content: content },
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const changeReplyTypeAndParentIdHandler = (replyType, parentId) => {

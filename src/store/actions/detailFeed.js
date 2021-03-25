@@ -1,7 +1,10 @@
 import SERVER_ADDRESS from "../../constant/serverAddress";
 
+import moment from "moment";
+
 export const ADD_DETAIL_FEED = "SET_DETAIL_FEED";
 export const ADD_MORE_REPLY = "ADD_MORE_REPLY";
+export const ADD_REREPLY = "ADD_REREPLY";
 
 export const addDetailFeed = (feedId) => {
   return async (dispatch) => {
@@ -49,6 +52,46 @@ export const addMoreReply = (feedId, skip) => {
         feedId: feedId,
         replies: resData.replies,
       });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const addRereply = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${SERVER_ADDRESS}/reply/rereply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const reply = {
+        content: data.content,
+        parentReplyId: data.replyId,
+        feedId: data.feedId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        likeCount: 0,
+        rereplyIds: [],
+        rereplyCount: 0,
+        likeUserIds: [],
+        updatedAt: new Date(),
+        userId: localStorage.getItem("userId"),
+        userNickName: localStorage.getItem("userNickName"),
+        userProfileImageUrl: localStorage.getItem("userProfileImageUrl"),
+        _id: moment.now(),
+      };
+
+      dispatch({ type: ADD_REREPLY, reply: reply });
     } catch (err) {
       throw err;
     }
