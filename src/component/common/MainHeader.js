@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 
 // ICONS
 import home from "../../image/default_home.s.png";
@@ -30,12 +30,15 @@ import {
 const MainHeader = (props) => {
   const myRef = useRef();
   const inputRef = useRef();
+
   let typingTimer;
   const doneTypingInterval = 1000;
 
   const { selectedIcon } = useSelector((state) => state.navigations);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const [finding, setFinding] = useState(false);
 
   const iconClickHandler = (icon) => {
     dispatch(setIcon(icon));
@@ -54,6 +57,7 @@ const MainHeader = (props) => {
       .catch((error) => {
         console.log(error);
       });
+    setFinding(true);
   };
 
   const keyUpHandler = () => {
@@ -74,8 +78,20 @@ const MainHeader = (props) => {
       className="fixed top-0 left-0 w-full border-solid border-2 border-gray-500 bg-white"
       ref={myRef}
     >
+      {finding && (
+        <div
+          className="fixed w-screen h-screen z-10"
+          onClick={() => {
+            setFinding(false);
+          }}
+        >
+          <div className="fixed z-20 w-96 top-16 left-1/2 border-black border-2 border-solid transform -translate-x-1/2">
+            우하하하하하하하하하하하하
+          </div>
+        </div>
+      )}
       <div className=" text-center mx-auto flex justify-between items-center py-2">
-        <div className="font-custom text-2xl">JINSTAGRAM</div>
+        <div className="font-custom w-60 text-2xl">JINSTAGRAM</div>
         <div className="hidden sm:block sm:border-2 sm:border-black sm:border-solid">
           <input
             type="text"
