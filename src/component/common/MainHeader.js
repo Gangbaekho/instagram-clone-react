@@ -43,7 +43,17 @@ const MainHeader = (props) => {
   };
 
   const whenTimeout = () => {
-    console.log("타입을 친지 1초가 지났습니다.");
+    const nickName = inputRef.current.value;
+    fetch(`http://localhost:8080/user/${nickName}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const keyUpHandler = () => {
