@@ -164,7 +164,7 @@ export const decreaseRereplyLike = (data) => {
   return async (dispatch) => {
     try {
       const response = await fetchPostAPIWithJWT("/reply/like/decrease", {
-        body: data,
+        body: { replyId: data.rereplyId, feedId: data.feedId },
       });
 
       if (!response.ok) {

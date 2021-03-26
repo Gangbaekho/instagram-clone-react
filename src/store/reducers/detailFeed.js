@@ -169,7 +169,30 @@ export default (state = initialState, action) => {
         ...state,
       };
     case DECREASE_REREPLY_LIKE:
-
+      const updatedFeedCustomTwo = state.detailFeeds.find((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      if (updatedFeedCustomTwo) {
+        const updatedReplyCustomTwo = updatedFeedCustomTwo.replyIds.find(
+          (reply) => {
+            return reply._id.toString() === action.replyId;
+          }
+        );
+        if (updatedReplyCustomTwo) {
+          const updatedRereplyCustomTwo = updatedReplyCustomTwo.rereplyIds.find(
+            (rereply) => rereply._id.toString() === action.rereplyId
+          );
+          if (updatedRereplyCustomTwo) {
+            const updatedLikeUserIds = updatedRereplyCustomTwo.likeUserIds.filter(
+              (userId) => userId !== action.userId
+            );
+            updatedRereplyCustomTwo.likeUserIds = updatedLikeUserIds;
+          }
+        }
+      }
+      return {
+        ...state,
+      };
     default:
       return state;
   }
