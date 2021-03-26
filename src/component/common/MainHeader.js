@@ -29,6 +29,9 @@ import {
 
 const MainHeader = (props) => {
   const myRef = useRef();
+  const inputRef = useRef();
+  let typingTimer;
+  const doneTypingInterval = 1000;
 
   const { selectedIcon } = useSelector((state) => state.navigations);
   const history = useHistory();
@@ -37,6 +40,19 @@ const MainHeader = (props) => {
   const iconClickHandler = (icon) => {
     dispatch(setIcon(icon));
     history.push(`/${icon}`);
+  };
+
+  const whenTimeout = () => {
+    console.log("타입을 친지 1초가 지났습니다.");
+  };
+
+  const keyUpHandler = () => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(whenTimeout, doneTypingInterval);
+  };
+
+  const keyDownHandler = () => {
+    clearTimeout(typingTimer);
   };
 
   useLayoutEffect(() => {
@@ -50,7 +66,15 @@ const MainHeader = (props) => {
     >
       <div className=" text-center mx-auto flex justify-between items-center py-2">
         <div className="font-custom text-2xl">JINSTAGRAM</div>
-        <div className="hidden sm:block">SEARCHBOX</div>
+        <div className="hidden sm:block sm:border-2 sm:border-black sm:border-solid">
+          <input
+            type="text"
+            placeholder="Enter Nickname"
+            ref={inputRef}
+            onKeyUp={keyUpHandler}
+            onKeyDown={keyDownHandler}
+          />
+        </div>
         <ul className="flex">
           <li>
             <img
