@@ -11,6 +11,10 @@ import { REREPLY } from "../../constant/replyType";
 import { useDispatch } from "react-redux";
 import { addMoreRereply } from "../../store/actions/detailFeed";
 import { increaseReplyLike, decreaseReplyLike } from "../../store/actions/feed";
+import {
+  increaseRereplyLike,
+  decreaseRereplyLike,
+} from "../../store/actions/detailFeed";
 
 const FeedDetailReply = (props) => {
   const dispatch = useDispatch();
@@ -19,16 +23,32 @@ const FeedDetailReply = (props) => {
     props.likeUserIds.indexOf(localStorage.getItem("userId")) > -1;
 
   const likeButtonHandler = () => {
-    console.log(props._id.toString());
-    const bodyData = {
-      replyId: props._id.toString(),
-      feedId: props.feedId.toString(),
-    };
+    let bodyData;
+    let decreaseReplyLikeAction;
+    let increaseReplyLikeAction;
 
-    if (isHeartClicked) {
-      dispatch(decreaseReplyLike(bodyData));
+    if (props.recursiveExit === undefined) {
+      bodyData = {
+        replyId: props._id.toString(),
+        feedId: props.feedId.toString(),
+      };
+      decreaseReplyLikeAction = decreaseReplyLike;
+      increaseReplyLikeAction = increaseReplyLike;
+      console.log(bodyData);
     } else {
-      dispatch(increaseReplyLike(bodyData));
+      bodyData = {
+        rereplyId: props._id.toString(),
+        replyId: props.replyId.toString(),
+        feedId: props.feedId.toString(),
+      };
+      console.log(bodyData);
+      decreaseReplyLikeAction = decreaseRereplyLike;
+      increaseReplyLikeAction = increaseRereplyLike;
+    }
+    if (isHeartClicked) {
+      dispatch(decreaseReplyLikeAction(bodyData));
+    } else {
+      dispatch(increaseReplyLikeAction(bodyData));
     }
   };
 
@@ -72,7 +92,13 @@ const FeedDetailReply = (props) => {
           {
             props.recursiveExit === undefined &&
               props.rereplyIds.map((rereply) => (
-                <FeedDetailReply recursiveExit={true} {...rereply} />
+                <FeedDetailReply
+                  key={rereply._id.toString()}
+                  recursiveExit={true}
+                  {...rereply}
+                  replyId={props._id.toString()}
+                  feedId={props.feedId}
+                />
               ))
             // (
             //   <div>
@@ -83,6 +109,10 @@ const FeedDetailReply = (props) => {
         </div>
       </article>
       <article className="border-2 border-black border-solid relative">
+        {
+          // 여기다가 분기를 치면 될 것 같다.
+          //
+        }
         <button onClick={likeButtonHandler}>
           <img
             src={isHeartClicked ? clicked_heart : default_heart}

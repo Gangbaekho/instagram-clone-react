@@ -2,10 +2,14 @@ import SERVER_ADDRESS from "../../constant/serverAddress";
 
 import moment from "moment";
 
+import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
+
 export const ADD_DETAIL_FEED = "SET_DETAIL_FEED";
 export const ADD_MORE_REPLY = "ADD_MORE_REPLY";
 export const ADD_REREPLY = "ADD_REREPLY";
 export const ADD_MORE_REREPLY = "ADD_MORE_REREPLY";
+export const INCREASE_REREPLY_LIKE = "INCREASE_REREPLY_LIKE";
+export const DECREASE_REREPLY_LIKE = "DECREASE_REREPLY_LIKE";
 
 export const addDetailFeed = (feedId) => {
   return async (dispatch) => {
@@ -125,6 +129,54 @@ export const addMoreRereply = (data) => {
         feedId: data.feedId,
         replyId: data.replyId,
         replies: resData.replies,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const increaseRereplyLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/reply/like/increase", {
+        body: { replyId: data.rereplyId, feedId: data.feedId },
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: INCREASE_REREPLY_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+        replyId: data.replyId,
+        rereplyId: data.rereplyId,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const decreaseRereplyLike = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchPostAPIWithJWT("/reply/like/decrease", {
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      dispatch({
+        type: DECREASE_REREPLY_LIKE,
+        userId: localStorage.getItem("userId"),
+        feedId: data.feedId,
+        replyId: data.replyId,
+        rereplyId: data.rereplyId,
       });
     } catch (err) {
       throw err;

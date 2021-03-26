@@ -3,6 +3,8 @@ import {
   ADD_MORE_REPLY,
   ADD_MORE_REREPLY,
   ADD_REREPLY,
+  INCREASE_REREPLY_LIKE,
+  DECREASE_REREPLY_LIKE,
 } from "../actions/detailFeed";
 
 import {
@@ -143,10 +145,30 @@ export default (state = initialState, action) => {
           updatedReplyIndexOne
         ].likeUserIds = filteredLikeUserIds;
       }
-
       return {
         ...state,
       };
+    case INCREASE_REREPLY_LIKE:
+      const updatedFeedCustom = state.detailFeeds.find((feed) => {
+        return feed._id.toString() === action.feedId;
+      });
+      if (updatedFeedCustom) {
+        const updatedReplyCustom = updatedFeedCustom.replyIds.find((reply) => {
+          return reply._id.toString() === action.replyId;
+        });
+        if (updatedReplyCustom) {
+          const updatedRereplyCustom = updatedReplyCustom.rereplyIds.find(
+            (rereply) => rereply._id.toString() === action.rereplyId
+          );
+          if (updatedRereplyCustom) {
+            updatedRereplyCustom.likeUserIds.push(action.userId);
+          }
+        }
+      }
+      return {
+        ...state,
+      };
+    case DECREASE_REREPLY_LIKE:
 
     default:
       return state;
