@@ -106,6 +106,9 @@ const MainHeader = (props) => {
             ref={inputRef}
             onKeyUp={keyUpHandler}
             onKeyDown={keyDownHandler}
+            onFocus={() => {
+              setFinding(true);
+            }}
           />
         </div>
         <ul className="flex">
