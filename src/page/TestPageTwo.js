@@ -1,11 +1,11 @@
 import React from "react";
 
-import MainHeader from "../component/common/MainHeader";
+import UserList from "../component/common/UserList";
 
 const TestPageTwo = (props) => {
   return (
     <div>
-      <MainHeader />
+      <UserList />
     </div>
   );
 };

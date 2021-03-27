@@ -27,6 +27,8 @@ import {
   INDIVISUAL,
 } from "../../constant/page";
 
+import UserList from "../common/UserList";
+
 const MainHeader = (props) => {
   const myRef = useRef();
   const inputRef = useRef();
@@ -86,7 +88,7 @@ const MainHeader = (props) => {
           }}
         >
           <div className="fixed z-20 w-96 top-16 left-1/2 border-black border-2 border-solid transform -translate-x-1/2">
-            우하하하하하하하하하하하하
+            <UserList />
           </div>
         </div>
       )}
