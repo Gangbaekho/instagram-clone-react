@@ -1,11 +1,20 @@
 import React from "react";
 
 import SERVER_ADDRESS from "../../constant/serverAddress";
-import default_user from "../../image/default_user.s.png";
+import { fetchPostAPIWithJWT } from "../../utils/fetchApis";
 
 const User = (props) => {
   const addToFollowListHandler = () => {
-    alert(props._id);
+    fetchPostAPIWithJWT("/follow/", { body: { followeeId: props._id } })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
