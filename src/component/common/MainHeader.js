@@ -50,6 +50,9 @@ const MainHeader = (props) => {
 
   const whenTimeout = () => {
     const nickName = inputRef.current.value;
+    if (!nickName) {
+      return;
+    }
     dispatch(fetchUsers(nickName));
     // fetch(`http://localhost:8080/user/${nickName}`)
     //   .then((res) => {
