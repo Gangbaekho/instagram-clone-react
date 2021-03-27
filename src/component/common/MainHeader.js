@@ -17,6 +17,7 @@ import clickedAdd from "../../image/clicked_add.s.png";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setIcon } from "../../store/actions/navigation";
+import { fetchUsers } from "../../store/actions/user";
 
 import {
   FEED,
@@ -49,16 +50,17 @@ const MainHeader = (props) => {
 
   const whenTimeout = () => {
     const nickName = inputRef.current.value;
-    fetch(`http://localhost:8080/user/${nickName}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchUsers(nickName));
+    // fetch(`http://localhost:8080/user/${nickName}`)
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     setFinding(true);
   };
 
