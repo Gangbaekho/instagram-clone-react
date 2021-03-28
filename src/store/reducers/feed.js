@@ -26,9 +26,12 @@ export default (state = initialState, action) => {
         ...state,
       };
     case INCREASE_LIKE:
+      console.log("INCREASE LIKE IN FEED REDUCER");
+      console.log("What the");
       const updatedFeedIndexOne = state.feeds.findIndex((feed) => {
         return feed._id.toString() === action.feedId;
       });
+      console.log(updatedFeedIndexOne);
       state.feeds[updatedFeedIndexOne].isHeartClicked = true;
       state.feeds[updatedFeedIndexOne].likeCount++;
       return {

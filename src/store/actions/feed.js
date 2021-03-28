@@ -13,7 +13,7 @@ export const DECREASE_REPLY_LIKE = "DECREASE_REPLY_LIKE";
 export const fetchFeeds = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${SERVER_ADDRESS}/feed/`, {
+      const response = await fetch(`${SERVER_ADDRESS}/feed/v2/v2`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -25,7 +25,8 @@ export const fetchFeeds = () => {
       }
 
       const resData = await response.json();
-      console.log(resData);
+      console.log("IN FETCH FEEDS");
+      console.log(resData.feeds);
 
       dispatch({ type: SET_FEEDS, feeds: resData.feeds });
     } catch (err) {

@@ -7,12 +7,12 @@ import SERVER_ADDRESS from "../../constant/serverAddress";
 import { useSelector, useDispatch } from "react-redux";
 
 const FeedContainer = (props) => {
-  const loadedFeeds = useSelector((state) => state.feeds.feeds);
+  const loadedFeeds = useSelector((state) => state.feeds);
   console.log("loadedFeeds", loadedFeeds);
 
   return (
     <div className="mt-10 border-black border-2 border-solid space-y-10">
-      {loadedFeeds.map((feed) => {
+      {loadedFeeds.feeds.map((feed) => {
         return <Feed key={feed._id} {...feed} />;
       })}
     </div>

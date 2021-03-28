@@ -16,8 +16,6 @@ const FeedPage = (props) => {
   useEffect(() => {
     dispatch(fetchFeeds());
   }, []);
-  const allState = useSelector((state) => state);
-  console.log(allState);
 
   return (
     <>
