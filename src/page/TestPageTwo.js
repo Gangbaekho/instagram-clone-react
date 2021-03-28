@@ -1,11 +1,26 @@
 import React from "react";
 
-import UserList from "../component/common/UserList";
+import { fetchPostAPIWithJWT } from "../utils/fetchApis";
 
 const TestPageTwo = (props) => {
   return (
     <div>
-      <UserList />
+      <button
+        onClick={() => {
+          fetchPostAPIWithJWT("/feed/test/feed", { body: {} })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}
+      >
+        Fetch
+      </button>
     </div>
   );
 };

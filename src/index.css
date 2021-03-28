@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .border-check {
+    @apply border-2 border-black border-solid;
+  }
+}
+
 .min-w-xxs {
   min-width: 300px;
 }
