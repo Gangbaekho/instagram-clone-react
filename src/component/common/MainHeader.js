@@ -29,6 +29,7 @@ import {
 } from "../../constant/page";
 
 import UserList from "../common/UserList";
+import { fetchGetAPIWithJWT } from "../../utils/fetchApis";
 
 const MainHeader = (props) => {
   const myRef = useRef();
@@ -42,6 +43,8 @@ const MainHeader = (props) => {
   const dispatch = useDispatch();
 
   const [finding, setFinding] = useState(false);
+  const [isActivityClicked, setIsActivityClicked] = useState(false);
+  const [activities, setActivities] = useState([]);
 
   const iconClickHandler = (icon) => {
     dispatch(setIcon(icon));
@@ -54,16 +57,6 @@ const MainHeader = (props) => {
       return;
     }
     dispatch(fetchUsers(nickName));
-    // fetch(`http://localhost:8080/user/${nickName}`)
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     setFinding(true);
   };
 
@@ -74,6 +67,22 @@ const MainHeader = (props) => {
 
   const keyDownHandler = () => {
     clearTimeout(typingTimer);
+  };
+
+  const clickHeartIconHandler = () => {
+    setIsActivityClicked(true);
+    dispatch(setIcon(ACTIVITY));
+    fetchGetAPIWithJWT("/activity/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setActivities(data.activities);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useLayoutEffect(() => {
@@ -97,6 +106,24 @@ const MainHeader = (props) => {
           </div>
         </div>
       )}
+      {isActivityClicked && (
+        <div
+          className="fixed w-screen h-screen z-10"
+          onClick={() => {
+            setIsActivityClicked(false);
+            dispatch(setIcon(FEED));
+          }}
+        >
+          <div
+            className="fixed z-20 top-16 right-3 border-check"
+            style={{ width: "500px" }}
+          >
+            {activities.map((activity) => (
+              <div key={activity._id.toString()}>Activity</div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className=" text-center mx-auto flex justify-between items-center py-2">
         <div className="font-custom w-60 text-2xl">JINSTAGRAM</div>
         <div className="hidden sm:block sm:border-2 sm:border-black sm:border-solid">
@@ -115,7 +142,7 @@ const MainHeader = (props) => {
           <li>
             <img
               className="h-10 cursor-pointer"
-              src={selectedIcon === FEED ? clickedHome : home}
+              src={selectedIcon === FEED || "" ? clickedHome : home}
               onClick={iconClickHandler.bind(this, FEED)}
             />
           </li>
@@ -137,7 +164,7 @@ const MainHeader = (props) => {
             <img
               className="h-10 cursor-pointer"
               src={selectedIcon === ACTIVITY ? clickedHeart : heart}
-              onClick={iconClickHandler.bind(this, ACTIVITY)}
+              onClick={clickHeartIconHandler}
             />
           </li>
           <li>
