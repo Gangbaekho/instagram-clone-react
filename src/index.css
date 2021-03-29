@@ -10,6 +10,34 @@
   }
 }
 
+.c-flex-1 {
+  flex: 0.1;
+}
+.c-flex-2 {
+  flex: 0.2;
+}
+.c-flex-3 {
+  flex: 0.3;
+}
+.c-flex-4 {
+  flex: 0.4;
+}
+.c-flex-5 {
+  flex: 0.5;
+}
+.c-flex-6 {
+  flex: 0.6;
+}
+.c-flex-7 {
+  flex: 0.7;
+}
+.c-flex-8 {
+  flex: 0.8;
+}
+.c-flex-9 {
+  flex: 0.9;
+}
+
 .min-w-xxs {
   min-width: 300px;
 }

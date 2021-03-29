@@ -1,26 +1,13 @@
 import React from "react";
 
-import { fetchPostAPIWithJWT } from "../utils/fetchApis";
+import { fetchGetAPIWithJWT } from "../utils/fetchApis";
+
+import test from "../image/test.s.jpg";
 
 const TestPageTwo = (props) => {
   return (
-    <div>
-      <button
-        onClick={() => {
-          fetchPostAPIWithJWT("/feed/test/feed", { body: {} })
-            .then((res) => {
-              return res.json();
-            })
-            .then((data) => {
-              console.log(data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }}
-      >
-        Fetch
-      </button>
+    <div className="border-check h-52 w-52">
+      <img src={test} className="object-cover h-full w-full" />
     </div>
   );
 };
