@@ -7,7 +7,22 @@ import test from "../image/test.s.jpg";
 const TestPageTwo = (props) => {
   return (
     <div className="border-check h-52 w-52">
-      <img src={test} className="object-cover h-full w-full" />
+      <button
+        onClick={() => {
+          fetchGetAPIWithJWT("/activity/test")
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}
+      >
+        Test
+      </button>
     </div>
   );
 };
