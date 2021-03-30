@@ -2,6 +2,7 @@ import React from "react";
 import MainHeader from "../component/common/MainHeader";
 import ScrollContainer from "../component/common/ScrollContainer";
 import { Element } from "react-scroll";
+import Conversation from "../component/direct-message/Conversation";
 
 const DirectMessagePage = (props) => {
   return (
@@ -20,35 +21,23 @@ const DirectMessagePage = (props) => {
           </div>
           <div className="border-check">
             <ScrollContainer passClass="friend-list">
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
-              </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
-              </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
-              </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
-              </Element>
-              <Element className="border-check mb-20 overflow-hidden">
-                하하하하하하
+              <Element className="border-check overflow-hidden">
+                <Conversation />
               </Element>
             </ScrollContainer>
           </div>
