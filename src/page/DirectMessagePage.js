@@ -3,6 +3,7 @@ import MainHeader from "../component/common/MainHeader";
 import ScrollContainer from "../component/common/ScrollContainer";
 import { Element } from "react-scroll";
 import Conversation from "../component/direct-message/Conversation";
+import Message from "../component/direct-message/Message";
 
 const DirectMessagePage = (props) => {
   return (
@@ -43,17 +44,60 @@ const DirectMessagePage = (props) => {
           </div>
           <div className="border-check">
             <ScrollContainer passClass="chat-list">
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
-              <Element className="border-check mb-20">하하하하하하</Element>
+              <Element className="border-check ">
+                <Message from="asdasd" content="헬로" />
+              </Element>
+              <Element className="border-check ">
+                <Message from="6061563fad635a0adc06963a" content="반갑다" />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="asdasd"
+                  content="뭐하고 지내냐?뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐뭐하고 지내냐"
+                />
+              </Element>
+              <Element className="border-check ">
+                <Message
+                  from="6061563fad635a0adc06963a"
+                  content="뭐 그냥 있찌."
+                />
+              </Element>
             </ScrollContainer>
           </div>
         </div>
