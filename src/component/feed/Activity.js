@@ -10,16 +10,16 @@ const Activity = (props) => {
     >
       <div className="border-check c-flex-1">
         <img
-          src={`${SERVER_ADDRESS}/${props.profileImageUrl}`}
+          src={`${SERVER_ADDRESS}/${props.whomId.profileImageUrl}`}
           className="w-full"
         />
       </div>
       <div className="border-check c-flex-8 px-3">
-        {`${props.nickName}님이 사진을 좋아합니다. 댓글을 달았습니다. 팔로우 신청을 하였습니다.`}
+        {`${props.whomId.nickName}님이 사진을 좋아합니다. 댓글을 달았습니다. 팔로우 신청을 하였습니다.`}
       </div>
       <div className="border-check c-flex-1">
         <img
-          src={`${SERVER_ADDRESS}/${props.profileImageUrl}`}
+          src={`${SERVER_ADDRESS}/${props.feedId.contentUrls[0]}`}
           className="w-11 h-11 object-cover"
         />
       </div>
