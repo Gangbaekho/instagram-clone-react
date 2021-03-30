@@ -19,9 +19,6 @@ import { useHistory } from "react-router-dom";
 import { setIcon } from "../../store/actions/navigation";
 import { fetchUsers } from "../../store/actions/user";
 
-import Activity from "../feed/Activity";
-import { Element } from "react-scroll";
-
 import {
   FEED,
   DIRECT_MESSAGE,
@@ -33,6 +30,7 @@ import {
 
 import UserList from "../common/UserList";
 import { fetchGetAPIWithJWT } from "../../utils/fetchApis";
+import ActivityContainer from "../feed/ActivityContainer";
 
 const MainHeader = (props) => {
   const myRef = useRef();
@@ -121,22 +119,7 @@ const MainHeader = (props) => {
             className="fixed z-20 top-16 right-3 border-check"
             style={{ width: "500px" }}
           >
-            <Element
-              className="border-check scroll-hide"
-              id="scroll-container"
-              style={{
-                position: "relative",
-                overflow: "auto",
-                height: "300px",
-                // overflowY: "scroll",
-              }}
-            >
-              {activities.map((activity) => (
-                <Element key={activity._id.toString()}>
-                  <Activity {...activity} />
-                </Element>
-              ))}
-            </Element>
+            <ActivityContainer activities={activities} />
           </div>
         </div>
       )}
