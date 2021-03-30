@@ -101,3 +101,22 @@
   width: 0 !important;
   display: none;
 }
+
+.direct-message-height {
+  height: calc(100% - 96px);
+}
+
+.direct-message-grid {
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 350px 1fr;
+  grid-template-rows: 60px 1fr;
+}
+
+.friend-list {
+  height: calc(100vh - 156px);
+}
+
+.chat-list {
+  height: calc(100vh - 250px);
+}
