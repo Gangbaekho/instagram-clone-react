@@ -4,6 +4,7 @@ import ScrollContainer from "../component/common/ScrollContainer";
 import { Element } from "react-scroll";
 import Conversation from "../component/direct-message/Conversation";
 import Message from "../component/direct-message/Message";
+import DirectMessageForm from "../component/direct-message/DirectMessageForm";
 
 const DirectMessagePage = (props) => {
   return (
@@ -15,10 +16,10 @@ const DirectMessagePage = (props) => {
           style={{ width: "935px", marginTop: "76px", marginBottom: "20px" }}
         >
           <div className="flex justify-center items-center border-check">
-            ID
+            {localStorage.getItem("userNickName")}
           </div>
           <div className="flex justify-center items-center border-check">
-            <div>대화상대</div>
+            <div>대화 상대 아이디</div>
           </div>
           <div className="border-check">
             <ScrollContainer passClass="friend-list">
@@ -99,6 +100,7 @@ const DirectMessagePage = (props) => {
                 />
               </Element>
             </ScrollContainer>
+            <DirectMessageForm />
           </div>
         </div>
       </div>
