@@ -19,7 +19,7 @@ const Activity = (props) => {
 
   switch (props.activityType) {
     case "REPLY":
-      content = `${props.whoId.nickName}님이 댓글을 달았습니다.`;
+      content = `${props.whoId.nickName}님이 댓글을 달았습니다. : ${props.replyId.content}`;
       component = feedImageComponent;
       break;
     case "LIKE":
@@ -45,7 +45,7 @@ const Activity = (props) => {
           className="w-full"
         />
       </div>
-      <div className="border-check c-flex-8 px-3">{content}</div>
+      <div className="border-check c-flex-8 px-3 truncate">{content}</div>
       <div className="border-check c-flex-1">{component}</div>
     </div>
   );
