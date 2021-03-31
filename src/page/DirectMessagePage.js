@@ -18,7 +18,26 @@ const DirectMessagePage = (props) => {
     <div>
       <MainHeader />
       <Modal isOpen={true}>
-        <div>Hello there?</div>
+        <section
+          className="bg-white w-96 rounded-xl p-5 space-y-4"
+          style={{ height: "500px" }}
+        >
+          <article className="border-b-2 border-solid border-gray-300 py-2">
+            새로운 메시지
+          </article>
+          <article className="border-b-2 border-solid border-gray-300 py-2">
+            <div>
+              <label htmlFor="search">받는 사람 : &nbsp;</label>
+              <input type="text" id="search" />
+            </div>
+          </article>
+          <article>
+            <ScrollContainer customStyle={{ height: "350px" }}>
+              <Element>Test</Element>
+              <Element>Test</Element>
+            </ScrollContainer>
+          </article>
+        </section>
       </Modal>
       <div className="fixed border-check w-screen h-screen">
         <div

@@ -9,6 +9,7 @@ const ScrollContainer = (props) => {
       style={{
         position: "relative",
         overflow: "auto",
+        ...props.customStyle,
       }}
     >
       {props.children}
