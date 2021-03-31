@@ -23,7 +23,7 @@ const DirectMessagePage = (props) => {
       <MainHeader />
       <Modal isOpen={isOpen} openModalHandler={openModalHandler}>
         <section
-          className="bg-white w-96 rounded-xl p-5 space-y-4"
+          className="bg-white w-96 rounded-xl p-5 space-y-4 z-40"
           style={{ height: "500px" }}
         >
           <article className="border-b-2 border-solid border-gray-300 py-2">
