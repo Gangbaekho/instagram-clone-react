@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainHeader from "../component/common/MainHeader";
 import ScrollContainer from "../component/common/ScrollContainer";
 import { Element } from "react-scroll";
 import Conversation from "../component/direct-message/Conversation";
 import Message from "../component/direct-message/Message";
 import DirectMessageForm from "../component/direct-message/DirectMessageForm";
+import openSocket from "socket.io-client";
+import SERVER_ADDRESS from "../constant/serverAddress";
 
 const DirectMessagePage = (props) => {
+  useEffect(() => {
+    openSocket(SERVER_ADDRESS);
+  }, []);
+
   return (
     <div>
       <MainHeader />
