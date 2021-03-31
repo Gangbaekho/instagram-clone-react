@@ -7,7 +7,7 @@ import Message from "../component/direct-message/Message";
 import DirectMessageForm from "../component/direct-message/DirectMessageForm";
 import openSocket from "socket.io-client";
 import SERVER_ADDRESS from "../constant/serverAddress";
-import ModalContainer from "../component/common/ModalContainer";
+import Modal from "../component/common/Modal";
 
 const DirectMessagePage = (props) => {
   useEffect(() => {
@@ -17,7 +17,9 @@ const DirectMessagePage = (props) => {
   return (
     <div>
       <MainHeader />
-      <ModalContainer isOpen={true} />
+      <Modal isOpen={true}>
+        <div>Hello there?</div>
+      </Modal>
       <div className="fixed border-check w-screen h-screen">
         <div
           className="flex border-check direct-message-height direct-message-grid mx-auto"
