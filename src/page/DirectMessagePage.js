@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MainHeader from "../component/common/MainHeader";
 import ScrollContainer from "../component/common/ScrollContainer";
 import { Element } from "react-scroll";
@@ -10,14 +10,18 @@ import SERVER_ADDRESS from "../constant/serverAddress";
 import Modal from "../component/common/Modal";
 
 const DirectMessagePage = (props) => {
-  useEffect(() => {
-    openSocket(SERVER_ADDRESS);
-  }, []);
+  // useEffect(() => {
+  //   openSocket(SERVER_ADDRESS);
+  // }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const openModalHandler = (flag) => {
+    setIsOpen(flag);
+  };
   return (
     <div>
       <MainHeader />
-      <Modal isOpen={true}>
+      <Modal isOpen={isOpen} openModalHandler={openModalHandler}>
         <section
           className="bg-white w-96 rounded-xl p-5 space-y-4"
           style={{ height: "500px" }}
@@ -45,7 +49,14 @@ const DirectMessagePage = (props) => {
           style={{ width: "935px", marginTop: "76px", marginBottom: "20px" }}
         >
           <div className="flex justify-center items-center border-check">
-            {localStorage.getItem("userNickName")}
+            {localStorage.getItem("userNickName")}{" "}
+            <button
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            >
+              대화하기
+            </button>
           </div>
           <div className="flex justify-center items-center border-check">
             <div>대화 상대 아이디</div>
